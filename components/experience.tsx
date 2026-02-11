@@ -7,14 +7,14 @@ const experiences = [
         role: "Internship_Seeking",
         company: "Available for 2026",
         period: "2026",
-        description: "Looking for opportunities to apply full-stack skills in a dynamic environment.",
+        description: "Dedicated to building functional, user-centric software and eager to learn from industry experts in a fast-paced environment.",
         current: true,
     },
     {
-        role: "Full Stack Developer",
-        company: "Side Projects",
+        role: "Software Engineering Student & Independent Developer",
+        company: "Project Portfolio",
         period: "Present",
-        description: "Building scalable web applications, including BenAwangHub and JomSujud. Utilizing Next.js, Supabase, and Flutter.",
+        description: "Building a diverse range of functional applications, including BenAwangHub (Event Management) and JomSujud (Community Utility).",
         current: false,
     },
     {

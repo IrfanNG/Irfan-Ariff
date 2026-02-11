@@ -16,6 +16,7 @@ import {
   Cpu
 } from "lucide-react";
 import Image from "next/image";
+import { ContactSection } from "@/components/contact-section";
 
 export default function Home() {
   return (
@@ -34,7 +35,7 @@ export default function Home() {
           {/* JomSujud - Large Feature Card (2x2) */}
           <BentoGridItem
             className="md:col-span-2 md:row-span-2 border-white/10 bg-neutral-900/50 backdrop-blur-md"
-            header={<MobileShowcase primaryColor="bg-emerald-500" />}
+            header={<MobileShowcase primaryColor="bg-emerald-500" image1="/JomSujud1.png" image2="/JomSujud2.png" alt="JomSujud App" scale={1.5} />}
             title={<ProjectHeader title="JomSujud" extension=".dart" />}
             description={
               <div className="space-y-4 pt-2">
@@ -53,7 +54,7 @@ export default function Home() {
           {/* BenAwangHub - Mobile App */}
           <BentoGridItem
             className="md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md"
-            header={<MobileShowcase primaryColor="bg-blue-500" />}
+            header={<MobileShowcase primaryColor="bg-blue-500" image1="/BenAwangHub1.png" image2="/BenAwangHub2.png" alt="BenAwangHub App" />}
             title={<ProjectHeader title="BenAwangHub" extension=".tsx" />}
             description={<span className="text-neutral-400 text-sm">Community Hub/Family Event Management.</span>}
             icon={<Globe className="h-4 w-4 text-neutral-500" />}
@@ -67,7 +68,7 @@ export default function Home() {
           {/* CutiMate - Mobile App */}
           <BentoGridItem
             className="md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md"
-            header={<MobileShowcase primaryColor="bg-orange-500" />}
+            header={<MobileShowcase primaryColor="bg-orange-500" image1="/Cutimate1.png" image2="/Cutimate2.png" alt="CutiMate App" />}
             title={<ProjectHeader title="CutiMate" extension=".dart" />}
             description={<span className="text-neutral-400 text-sm">Holiday Planner With Group Voting.</span>}
             icon={<Globe className="h-4 w-4 text-orange-500" />}
@@ -123,6 +124,8 @@ export default function Home() {
         </BentoGrid>
       </section>
 
+
+
       <div className="grid md:grid-cols-3 gap-10">
         {/* Tech Stack */}
         <section className="col-span-1 space-y-6">
@@ -140,7 +143,6 @@ export default function Home() {
               "Flutter",
               "Dart",
               "Supabase",
-
               "Firebase (Firestore, Auth)",
               "SQL Scripts"
             ].map((tech) => (
@@ -162,6 +164,8 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      <ContactSection />
 
       <div className="h-20" /> {/* Spacer for scrolling */}
       <CommandPalette />
