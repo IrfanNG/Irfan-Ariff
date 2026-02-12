@@ -90,7 +90,7 @@ export function CommandPalette() {
                                         // TODO: PLACE YOUR RESUME FILE IN THE 'public' FOLDER
                                         // AND RENAME IT TO 'resume.pdf' OR UPDATE THE PATH BELOW.
                                         // ------------------------------------------------------------------
-                                        window.open("/cv.pdf", "_blank");
+                                        window.open("/my-cv.pdf", "_blank");
                                         setOpen(false);
                                     }}
                                 >
