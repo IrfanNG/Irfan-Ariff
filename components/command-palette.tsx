@@ -1,6 +1,6 @@
 "use client";
 
-import { Command, Check, FileText, Mail } from "lucide-react";
+import { Command, Check, FileText, Mail, MessageSquare } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -98,6 +98,22 @@ export function CommandPalette() {
                                     <span>View Resume</span>
                                     <span className="ml-auto text-xs text-zinc-600 group-hover:text-zinc-400 transition-colors">PDF</span>
                                 </div>
+
+                                {/* Connect via WhatsApp */}
+                                <a
+                                    href="https://wa.me/60183823063?text=Hello%20Irfan,%20I%20saw%20your%20portfolio..."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group flex cursor-pointer items-center rounded-sm px-2 py-2 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    <MessageSquare className="mr-2 h-4 w-4 text-zinc-500 group-hover:text-green-500 transition-colors" />
+                                    <div className="flex flex-col">
+                                        <span>Connect via WhatsApp</span>
+                                        <span className="text-[10px] text-zinc-600 group-hover:text-zinc-400 transition-colors">Direct uplink for quick inquiries</span>
+                                    </div>
+                                    <span className="ml-auto text-xs text-zinc-600 group-hover:text-zinc-400 transition-colors">+60...</span>
+                                </a>
                             </div>
                         </div>
                     </motion.div>

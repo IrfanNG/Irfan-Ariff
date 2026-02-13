@@ -78,7 +78,7 @@ export function Hero() {
                 className="mt-8 text-gray-400 text-sm sm:text-base max-w-2xl leading-relaxed font-sans"
             >
                 <p>
-                    Need a developer who speaks in code but thinks in solutions? I build high-performance web applications with modern tech stacks.
+                    Developing functional software for real-world needs. From landing pages to community ecosystems, I build with a focus on clean code and minimal design.
                 </p>
             </motion.div>
         </div>

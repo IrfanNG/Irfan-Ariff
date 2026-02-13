@@ -14,7 +14,7 @@ const experiences = [
         role: "Software Engineering Student & Independent Developer",
         company: "Project Portfolio",
         period: "Present",
-        description: "Building a diverse range of functional applications, including BenAwangHub (Event Management) and JomSujud (Community Utility).",
+        description: "Building functional web and mobile solutions, ranging from landing pages to community-driven ecosystems like BenAwangHub and JomSujud.",
         current: false,
     },
     {

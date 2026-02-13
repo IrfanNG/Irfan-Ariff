@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
+import { Navbar } from "@/components/navbar";
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
@@ -24,7 +26,8 @@ export default function RootLayout({
         jetbrainsMono.variable
       )}>
         <div className="fixed inset-0 pointer-events-none z-[100] scanline opacity-5" />
-        <main className="relative flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <Navbar />
+        <main className="relative flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-24 md:pt-32">
           {children}
         </main>
       </body>
