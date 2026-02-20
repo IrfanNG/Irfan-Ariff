@@ -14,7 +14,7 @@ interface MobileShowcaseProps {
 
 export function MobileShowcase({ primaryColor = "bg-neutral-800", image1, image2, alt = "Mobile App", scale = 1 }: MobileShowcaseProps) {
     return (
-        <div className="flex items-center justify-center w-full h-full min-h-[14rem] relative overflow-hidden group-hover/bento:cursor-pointer">
+        <div className="flex items-center justify-center w-full h-[12rem] relative overflow-hidden group-hover/bento:cursor-pointer">
             {/* Background Glow */}
             <div className={cn("absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-800 via-black to-black transition-colors duration-500", primaryColor.replace("bg-", "from-").replace("-500", "-900"))} />
 
@@ -28,7 +28,7 @@ export function MobileShowcase({ primaryColor = "bg-neutral-800", image1, image2
                     initial={{ y: -10, x: 20, rotate: 6 }}
                     animate={{ y: [-10, -15, -10] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute w-[140px] h-[240px] rounded-[32px] bg-neutral-900 border-4 border-neutral-800 shadow-2xl z-10 group-hover/bento:translate-x-8 group-hover/bento:-translate-y-4 transition-transform duration-500 right-8 top-8"
+                    className="absolute w-[140px] h-[240px] rounded-[32px] bg-neutral-900 border-4 border-neutral-800 shadow-2xl z-10 group-hover/bento:translate-x-8 group-hover/bento:-translate-y-4 transition-transform duration-500 right-8 top-12"
                 >
                     <div className="w-full h-full bg-neutral-950 rounded-[28px] overflow-hidden relative">
                         {/* Mock Content or Image */}

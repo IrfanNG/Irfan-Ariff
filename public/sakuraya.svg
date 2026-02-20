@@ -1,0 +1,21 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#050505"/>
+  <text x="60" y="80" font-family="sans-serif" font-weight="bold" font-size="28" fill="#e879f9">SakuRaya</text>
+  <text x="1140" y="80" text-anchor="end" font-family="sans-serif" font-size="16" fill="#dedede">Login</text>
+  
+  <text x="600" y="350" text-anchor="middle" font-family="Inter, sans-serif" font-weight="bold" font-size="64" fill="white" letter-spacing="-1">Plan your <tspan fill="#2dd4bf">barakah</tspan>,</text>
+  <text x="600" y="430" text-anchor="middle" font-family="Inter, sans-serif" font-weight="bold" font-size="64" fill="white" letter-spacing="-1">skip the bank queue.</text>
+  
+  <text x="600" y="520" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#a3a3a3">The minimalist Duit Raya & Gifting Planner designed for the modern</text>
+  <text x="600" y="550" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#a3a3a3">Muslim. Manage budget, track recipients, and crowdsource bank status in real-time.</text>
+  
+  <g transform="translate(480, 600)">
+    <rect width="140" height="48" rx="6" fill="white"/>
+    <text x="70" y="30" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="16" fill="black">Get Started →</text>
+  </g>
+  
+  <g transform="translate(640, 600)">
+    <rect width="140" height="48" rx="6" fill="#1f1f1f" stroke="#333"/>
+    <text x="70" y="30" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="16" fill="#dedede">Learn More</text>
+  </g>
+</svg>

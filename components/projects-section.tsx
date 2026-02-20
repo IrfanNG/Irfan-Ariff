@@ -2,12 +2,12 @@
 
 import { useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Smartphone, Globe, Database, Layers } from "lucide-react";
+import { Terminal, Smartphone, Globe, Database, Layers, Wallet } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/bento-grid";
 import { MobileShowcase } from "@/components/mobile-showcase";
 import { BrowserMockup } from "@/components/browser-mockup";
 import { ProjectHeader } from "@/components/project-header";
-import { TerminalShowcase } from "@/components/terminal-showcase";
+
 import { LatestBadge } from "@/components/latest-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -28,13 +28,27 @@ export function ProjectsSection() {
 
     const projects: Project[] = [
         {
-            // 1. Vanguard Terminal (Latest)
+            // 0. SakuRaya (Latest)
+            title: "SakuRaya",
+            extension: ".tsx",
+            description: <span className="text-neutral-400 text-sm">Minimalist Duit Raya & Gifting Planner.</span>,
+            header: <BrowserMockup appName="SakuRaya" url="sakuraya.vercel.app" imageSrc="/saku-raya.png" />,
+            icon: <Wallet className="h-4 w-4 text-pink-500" />,
+            className: "md:col-span-2 md:row-span-2 border-white/10 bg-neutral-900/50 backdrop-blur-md",
+            badges: [
+                { text: "Next.js 15", className: "text-[10px] border-white/20 text-white", variant: "outline" },
+                { text: "Supabase", className: "text-[10px] border-green-900/50 text-green-500", variant: "outline" },
+                { text: "Tailwind CSS", className: "text-[10px] border-cyan-900/50 text-cyan-500", variant: "outline" },
+            ]
+        },
+        {
+            // 1. Vanguard Terminal
             title: "Vanguard",
             extension: ".tsx",
             description: <span className="text-neutral-400 text-sm">Real-time Website Audits System.</span>,
-            header: <BrowserMockup appName="Vanguard" url="vanguard-terminal.com"><TerminalShowcase hideHeader className="min-h-0 bg-neutral-950" /></BrowserMockup>,
+            header: <BrowserMockup appName="Vanguard" url="vanguard-terminal.com" imageSrc="/vanguard.png" />,
             icon: <Terminal className="h-4 w-4 text-green-500" />,
-            className: "md:col-span-2 md:row-span-2 border-white/10 bg-neutral-900/50 backdrop-blur-md",
+            className: "md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md",
             badges: [
                 { text: "Next.js 16", className: "text-[10px] border-green-900/50 text-green-500", variant: "outline" },
                 { text: "Xterm.js", className: "text-[10px] border-blue-900/50 text-blue-500", variant: "outline" },
@@ -134,7 +148,7 @@ export function ProjectsSection() {
             </h2>
 
             <div className="relative">
-                <BentoGrid className="md:auto-rows-[22rem]">
+                <BentoGrid className="md:auto-rows-[minmax(22rem,_auto)]">
                     {visibleProjects.map((project, index) => {
                         const isLatest = index === 0;
                         return (
@@ -173,10 +187,10 @@ export function ProjectsSection() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                                className="md:col-span-1 row-span-1"
+                                className="md:col-span-1 row-span-1 h-full show-overflow"
                             >
                                 <BentoGridItem
-                                    className={project.className}
+                                    className={project.className + " h-full"}
                                     header={project.header}
                                     title={<ProjectHeader title={project.title} extension={project.extension} />}
                                     description={project.description}
