@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   description: "Minimalist, high-tech personal portfolio.",
 };
 
+export const revalidate = 60; // Ensure Vercel invalidates the cache every 60 seconds
+
 export default async function RootLayout({
   children,
 }: Readonly<{
