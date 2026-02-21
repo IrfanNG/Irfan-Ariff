@@ -1,32 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ExperienceData } from "@/lib/types";
 
-const experiences = [
-    {
-        role: "Internship_Seeking",
-        company: "Available for 2026",
-        period: "2026",
-        description: "Dedicated to building functional, user-centric software and eager to learn from industry experts in a fast-paced environment.",
-        current: true,
-    },
-    {
-        role: "Software Engineering Student & Independent Developer",
-        company: "Project Portfolio",
-        period: "Present",
-        description: "Building functional web and mobile solutions, ranging from landing pages to community-driven ecosystems like BenAwangHub and JomSujud.",
-        current: false,
-    },
-    {
-        role: "Student",
-        company: "Universiti Kuala Lumpur Malaysian Institute of Information Technology",
-        period: "2023 - Present",
-        description: "Pursuing Information Technology degree. Focused on software engineering and system architecture.",
-        current: false,
-    },
-];
+export function Experience({ experiences }: { experiences: ExperienceData[] }) {
+    if (!experiences || experiences.length === 0) {
+        return (
+            <div className="text-neutral-500 text-sm font-mono text-center py-10">
+                [ No experience data found ]
+            </div>
+        );
+    }
 
-export function Experience() {
     return (
         <div className="relative border-l border-zinc-800 ml-3 space-y-12">
             {experiences.map((exp, index) => (
@@ -39,14 +24,14 @@ export function Experience() {
                     className="relative pl-8"
                 >
                     {/* Timeline Dot */}
-                    <div className={`absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full border border-black ${exp.current ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.7)]" : "bg-zinc-600"}`} />
+                    <div className={`absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full border border-black ${exp.is_active ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.7)]" : "bg-zinc-600"}`} />
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                        <h3 className="text-lg font-semibold text-zinc-100">{exp.role}</h3>
-                        <span className="text-xs font-mono text-zinc-500">{exp.period}</span>
+                        <h3 className="text-lg font-semibold text-zinc-100">{exp.title}</h3>
+                        <span className="text-xs font-mono text-zinc-500">{exp.date_range}</span>
                     </div>
-                    <div className="text-sm text-zinc-400 mb-2 font-medium">{exp.company}</div>
-                    <p className="text-zinc-500 text-sm leading-relaxed max-w-lg">
+                    {exp.organization && <div className="text-sm text-zinc-400 mb-2 font-medium">{exp.organization}</div>}
+                    <p className="text-zinc-500 text-sm leading-relaxed max-w-lg whitespace-pre-line">
                         {exp.description}
                     </p>
                 </motion.div>

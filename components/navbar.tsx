@@ -13,7 +13,9 @@ const navLinks = [
     { name: "[ 03. contact ]", href: "#contact" },
 ];
 
-export function Navbar() {
+import { ProfileData } from "@/lib/types";
+
+export function Navbar({ profile }: { profile: ProfileData | null }) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -135,7 +137,7 @@ export function Navbar() {
                         </nav>
 
                         <div className="absolute bottom-10 text-neutral-500 font-mono text-xs">
-                            <span className="text-green-500">&gt;</span> SYSTEM.READY
+                            <span className="text-green-500">&gt;</span> {profile?.availability_status || "SYSTEM.READY"}
                         </div>
                     </motion.div>
                 )}

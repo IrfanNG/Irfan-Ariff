@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, Smartphone, Globe, Database, Layers, Wallet } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/bento-grid";
@@ -12,129 +12,78 @@ import { LatestBadge } from "@/components/latest-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ProjectData } from "@/lib/types";
 
-interface Project {
-    title: string;
-    extension: string;
-    description: ReactNode;
-    header: ReactNode;
-    icon: ReactNode;
-    className?: string; // For grid spans
-    badges: { text: string; className: string; variant?: "default" | "secondary" | "destructive" | "outline" }[];
+interface ProjectsSectionProps {
+    projects: ProjectData[];
 }
 
-export function ProjectsSection() {
+export function ProjectsSection({ projects }: ProjectsSectionProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const projects: Project[] = [
-        {
-            // 0. SakuRaya (Latest)
-            title: "SakuRaya",
-            extension: ".tsx",
-            description: <span className="text-neutral-400 text-sm">Minimalist Duit Raya & Gifting Planner.</span>,
-            header: <BrowserMockup appName="SakuRaya" url="sakuraya.vercel.app" imageSrc="/saku-raya.png" />,
-            icon: <Wallet className="h-4 w-4 text-pink-500" />,
-            className: "md:col-span-2 md:row-span-2 border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Next.js 15", className: "text-[10px] border-white/20 text-white", variant: "outline" },
-                { text: "Supabase", className: "text-[10px] border-green-900/50 text-green-500", variant: "outline" },
-                { text: "Tailwind CSS", className: "text-[10px] border-cyan-900/50 text-cyan-500", variant: "outline" },
-            ]
-        },
-        {
-            // 1. Vanguard Terminal
-            title: "Vanguard",
-            extension: ".tsx",
-            description: <span className="text-neutral-400 text-sm">Real-time Website Audits System.</span>,
-            header: <BrowserMockup appName="Vanguard" url="vanguard-terminal.com" imageSrc="/vanguard.png" />,
-            icon: <Terminal className="h-4 w-4 text-green-500" />,
-            className: "md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Next.js 16", className: "text-[10px] border-green-900/50 text-green-500", variant: "outline" },
-                { text: "Xterm.js", className: "text-[10px] border-blue-900/50 text-blue-500", variant: "outline" },
-                { text: "PSI API", className: "text-[10px] border-purple-900/50 text-purple-500", variant: "outline" },
-            ]
-        },
-        {
-            // 2. CutiMate
-            title: "CutiMate",
-            extension: ".dart",
-            description: <span className="text-neutral-400 text-sm">Holiday Planner With Group Voting.</span>,
-            header: <MobileShowcase primaryColor="bg-orange-500" image1="/Cutimate1.png" image2="/Cutimate2.png" alt="CutiMate App" />,
-            icon: <Globe className="h-4 w-4 text-orange-500" />,
-            className: "md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Flutter", className: "text-[10px] border-blue-900/50 text-blue-500", variant: "outline" },
-                { text: "Firebase", className: "text-[10px] border-yellow-900/50 text-yellow-500", variant: "outline" },
-                { text: "Places API", className: "text-[10px] border-green-900/50 text-green-500", variant: "outline" },
-            ]
-        },
-        {
-            // 3. JomSujud
-            title: "JomSujud",
-            extension: ".dart",
-            description: <span className="text-neutral-400 text-sm">Iconic Mosque Locator & Prayer Times App.</span>,
-            header: <MobileShowcase primaryColor="bg-emerald-500" image1="/JomSujud1.png" image2="/JomSujud2.png" alt="JomSujud App" />,
-            icon: <Smartphone className="h-4 w-4 text-emerald-500" />,
-            className: "md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Flutter", className: "bg-emerald-900/20 text-emerald-400 hover:bg-emerald-900/30", variant: "secondary" },
-                { text: "Places API", className: "bg-blue-900/20 text-blue-400 hover:bg-blue-900/30", variant: "secondary" }
-            ]
-        },
-        {
-            // 4. BinaPintar
-            title: "BinaPintar",
-            extension: ".sql",
-            description: <span className="text-neutral-400 text-sm">Smart Construction CMS.</span>,
-            header: <BrowserMockup appName="BinaPintar" url="cms.binapintar.com" imageSrc="/BinaPintar.png" />,
-            icon: <Database className="h-4 w-4 text-orange-500" />,
-            className: "md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Supabase", className: "text-[10px] border-orange-900/50 text-orange-500", variant: "outline" },
-                { text: "CMS", className: "text-[10px] border-yellow-900/50 text-yellow-500", variant: "outline" },
-            ]
-        },
-        {
-            // 5. Qalam Irma
-            title: "Qalam Irma",
-            extension: ".tsx",
-            description: <span className="text-neutral-400 text-sm">Business landing page.</span>,
-            header: <BrowserMockup appName="Qalam Irma" url="qalamirma.com" imageSrc="/Qalam Irma.png" />,
-            icon: <Layers className="h-4 w-4 text-indigo-500" />,
-            className: "h-full border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Next.js", className: "text-[10px] border-indigo-900/50 text-indigo-500", variant: "outline" },
-                { text: "SEO", className: "text-[10px] border-pink-900/50 text-pink-500", variant: "outline" },
-            ]
-        },
-        {
-            // 6. HabibahKamal
-            title: "HabibahKamal",
-            extension: ".tsx",
-            description: <span className="text-neutral-400 text-sm">Personal Brand Landing Page.</span>,
-            header: <BrowserMockup appName="HabibahKamal" url="habibahkamal.com" imageSrc="/HabibahKamal.png" />,
-            icon: <Globe className="h-4 w-4 text-pink-500" />,
-            className: "h-full border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Next.js", className: "text-[10px] border-pink-900/50 text-pink-500", variant: "outline" },
-                { text: "Framer Motion", className: "text-[10px] border-purple-900/50 text-purple-500", variant: "outline" },
-            ]
-        },
-        {
-            // 7. BenAwangHub
-            title: "BenAwangHub",
-            extension: ".tsx",
-            description: <span className="text-neutral-400 text-sm">Community Hub/Family Event Management.</span>,
-            header: <MobileShowcase primaryColor="bg-blue-500" image1="/BenAwangHub1.png" image2="/BenAwangHub2.png" alt="BenAwangHub App" />,
-            icon: <Globe className="h-4 w-4 text-neutral-500" />,
-            className: "h-full border-white/10 bg-neutral-900/50 backdrop-blur-md",
-            badges: [
-                { text: "Flutter", className: "text-[10px] border-blue-900/50 text-blue-500", variant: "outline" },
-                { text: "Firebase", className: "text-[10px] border-green-900/50 text-green-500", variant: "outline" },
-            ]
+    // If projects is empty from DB
+    if (!projects || projects.length === 0) {
+        return (
+            <section id="projects" className="space-y-6">
+                <h2 className="text-2xl font-bold tracking-tight text-white/90 flex items-center gap-2">
+                    <Terminal className="w-5 h-5 text-green-500" />
+                    <span className="text-green-500">~/projects</span>
+                    <span className="text-gray-600">ls -la</span>
+                </h2>
+                <div className="w-full h-64 border border-white/5 rounded-2xl flex items-center justify-center bg-neutral-900/40 text-neutral-400 font-mono text-sm">
+                    &gt; No active projects returned from database.
+                </div>
+            </section>
+        );
+    }
+
+    const getIconForCategory = (category: string) => {
+        switch (category) {
+            case 'mobile': return <Smartphone className="h-4 w-4 text-emerald-500" />;
+            case 'system': return <Terminal className="h-4 w-4 text-green-500" />;
+            case 'web':
+            default: return <Globe className="h-4 w-4 text-blue-500" />;
         }
-    ];
+    };
+
+    const getExtensionForCategory = (category: string) => {
+        switch (category) {
+            case 'mobile': return '.dart';
+            case 'system': return '.rs';
+            case 'web':
+            default: return '.tsx';
+        }
+    };
+
+    const renderHeader = (project: ProjectData) => {
+        if (project.category === 'mobile') {
+            return <MobileShowcase
+                primaryColor="bg-blue-500"
+                image1={project.image_primary || undefined}
+                image2={project.image_secondary || undefined}
+                alt={project.title}
+            />;
+        }
+        return <BrowserMockup
+            appName={project.title}
+            url={project.live_url || project.github_url || `${project.slug}.dev`}
+            imageSrc={project.image_primary || undefined}
+        />;
+    };
+
+    const getBadgeStyle = (index: number) => {
+        const variants = [
+            "text-[10px] border-white/20 text-white",
+            "text-[10px] border-green-900/50 text-green-500",
+            "text-[10px] border-cyan-900/50 text-cyan-500",
+            "text-[10px] border-blue-900/50 text-blue-500",
+            "text-[10px] border-purple-900/50 text-purple-500",
+            "text-[10px] border-orange-900/50 text-orange-500",
+            "text-[10px] border-yellow-900/50 text-yellow-500",
+            "text-[10px] border-pink-900/50 text-pink-500"
+        ];
+        return variants[index % variants.length];
+    };
 
     const visibleProjects = projects.slice(0, 3);
     const expandedProjects = projects.slice(3);
@@ -150,27 +99,29 @@ export function ProjectsSection() {
             <div className="relative">
                 <BentoGrid className="md:auto-rows-[minmax(22rem,_auto)]">
                     {visibleProjects.map((project, index) => {
-                        const isLatest = index === 0;
+                        const isLatest = project.is_latest;
+                        const className = isLatest ? "md:col-span-2 md:row-span-2 border-white/10 bg-neutral-900/50 backdrop-blur-md" : "md:col-span-1 border-white/10 bg-neutral-900/50 backdrop-blur-md";
+
                         return (
                             <BentoGridItem
-                                key={project.title}
-                                className={project.className}
+                                key={project.id}
+                                className={className}
                                 header={
                                     <>
                                         {isLatest && <LatestBadge />}
-                                        {project.header}
+                                        {renderHeader(project)}
                                     </>
                                 }
-                                title={<ProjectHeader title={project.title} extension={project.extension} />}
-                                description={project.description}
-                                icon={project.icon}
+                                title={<ProjectHeader title={project.title} extension={getExtensionForCategory(project.category)} />}
+                                description={<span className="text-neutral-400 text-sm whitespace-pre-line">{project.description}</span>}
+                                icon={getIconForCategory(project.category)}
                                 isLatest={isLatest}
                             >
-                                {project.badges.length > 0 && (
+                                {project.tech_stack && project.tech_stack.length > 0 && (
                                     <div className="flex flex-wrap gap-1 mt-2">
-                                        {project.badges.map((badge, i) => (
-                                            <Badge key={i} variant={badge.variant} className={badge.className}>
-                                                {badge.text}
+                                        {project.tech_stack.map((tech, i) => (
+                                            <Badge key={i} variant="outline" className={getBadgeStyle(i)}>
+                                                {tech}
                                             </Badge>
                                         ))}
                                     </div>
@@ -182,7 +133,7 @@ export function ProjectsSection() {
                     <AnimatePresence mode="popLayout">
                         {isExpanded && expandedProjects.map((project, index) => (
                             <motion.div
-                                key={project.title}
+                                key={project.id}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
@@ -190,17 +141,17 @@ export function ProjectsSection() {
                                 className="md:col-span-1 row-span-1 h-full show-overflow"
                             >
                                 <BentoGridItem
-                                    className={project.className + " h-full"}
-                                    header={project.header}
-                                    title={<ProjectHeader title={project.title} extension={project.extension} />}
-                                    description={project.description}
-                                    icon={project.icon}
+                                    className="h-full border-white/10 bg-neutral-900/50 backdrop-blur-md"
+                                    header={renderHeader(project)}
+                                    title={<ProjectHeader title={project.title} extension={getExtensionForCategory(project.category)} />}
+                                    description={<span className="text-neutral-400 text-sm whitespace-pre-line">{project.description}</span>}
+                                    icon={getIconForCategory(project.category)}
                                 >
-                                    {project.badges.length > 0 && (
+                                    {project.tech_stack && project.tech_stack.length > 0 && (
                                         <div className="flex flex-wrap gap-1 mt-2">
-                                            {project.badges.map((badge, i) => (
-                                                <Badge key={i} variant={badge.variant} className={badge.className}>
-                                                    {badge.text}
+                                            {project.tech_stack.map((tech, i) => (
+                                                <Badge key={i} variant="outline" className={getBadgeStyle(i)}>
+                                                    {tech}
                                                 </Badge>
                                             ))}
                                         </div>
@@ -213,7 +164,7 @@ export function ProjectsSection() {
 
                 {/* Gradient Mask */}
                 <AnimatePresence>
-                    {!isExpanded && (
+                    {!isExpanded && projects.length > 3 && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -225,23 +176,25 @@ export function ProjectsSection() {
             </div>
 
             {/* Toggle Button */}
-            <div className="flex justify-center pt-4 relative z-20">
-                <Button
-                    variant="outline"
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="border-green-900/30 text-green-500 hover:text-green-400 hover:bg-green-950/30 hover:border-green-500/50 transition-all font-mono text-xs tracking-wider"
-                >
-                    {isExpanded ? (
-                        <>
-                            [ SHOW_LESS ]
-                        </>
-                    ) : (
-                        <>
-                            [ LS_ALL_FILES ]
-                        </>
-                    )}
-                </Button>
-            </div>
+            {projects.length > 3 && (
+                <div className="flex justify-center pt-4 relative z-20">
+                    <Button
+                        variant="outline"
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="border-green-900/30 text-green-500 hover:text-green-400 hover:bg-green-950/30 hover:border-green-500/50 transition-all font-mono text-xs tracking-wider"
+                    >
+                        {isExpanded ? (
+                            <>
+                                [ SHOW_LESS ]
+                            </>
+                        ) : (
+                            <>
+                                [ LS_ALL_FILES ]
+                            </>
+                        )}
+                    </Button>
+                </div>
+            )}
         </section>
     );
 }

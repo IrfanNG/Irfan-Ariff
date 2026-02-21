@@ -5,8 +5,11 @@ import { Github, Linkedin, Mail, ArrowRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ProfileData } from "@/lib/types";
 
-export function ContactSection() {
+export function ContactSection({ profile }: { profile: ProfileData | null }) {
+    if (!profile) return null;
+
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -37,7 +40,7 @@ export function ContactSection() {
                             <span className="text-neutral-400 text-sm font-mono tracking-wide">STATUS: [ONLINE]</span>
                         </div>
                         <p className="text-neutral-300 leading-relaxed font-light">
-                            Currently <span className="text-white font-medium">actively seeking Internship opportunities</span> for the 2026 intake. Open to collaborations and freelance work.
+                            {profile.availability_status || "Actively seeking Internship opportunities"}
                         </p>
                     </div>
 
@@ -45,50 +48,56 @@ export function ContactSection() {
                     <div className="space-y-4">
                         <h3 className="text-neutral-500 text-xs font-mono uppercase tracking-widest mb-6">Direct Uplinks</h3>
 
-                        <a href="https://github.com/IrfanNG" target="_blank" rel="noopener noreferrer" className="block group">
-                            <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-neutral-900/50 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 group-hover:translate-x-1">
-                                <div className="flex items-center gap-4">
-                                    <div className="p-2 rounded-md bg-neutral-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
-                                        <Github className="w-5 h-5" />
+                        {profile.github_url && (
+                            <a href={profile.github_url?.startsWith('http') ? profile.github_url : `https://${profile.github_url}`} target="_blank" rel="noopener noreferrer" className="block group">
+                                <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-neutral-900/50 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 group-hover:translate-x-1">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-2 rounded-md bg-neutral-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
+                                            <Github className="w-5 h-5" />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-bold text-white group-hover:text-green-400 transition-colors">GitHub</span>
+                                            <span className="text-xs text-neutral-500 font-mono">Profile</span>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-sm font-bold text-white group-hover:text-green-400 transition-colors">GitHub</span>
-                                        <span className="text-xs text-neutral-500 font-mono">gh/irfanNG</span>
-                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transform duration-300" />
                                 </div>
-                                <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transform duration-300" />
-                            </div>
-                        </a>
+                            </a>
+                        )}
 
-                        <a href="https://www.linkedin.com/in/irfan-ariff-20691a264/" target="_blank" rel="noopener noreferrer" className="block group">
-                            <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-neutral-900/50 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 group-hover:translate-x-1">
-                                <div className="flex items-center gap-4">
-                                    <div className="p-2 rounded-md bg-neutral-800 text-white group-hover:bg-blue-600 transition-colors">
-                                        <Linkedin className="w-5 h-5" />
+                        {profile.linkedin_url && (
+                            <a href={profile.linkedin_url?.startsWith('http') ? profile.linkedin_url : `https://${profile.linkedin_url}`} target="_blank" rel="noopener noreferrer" className="block group">
+                                <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-neutral-900/50 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 group-hover:translate-x-1">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-2 rounded-md bg-neutral-800 text-white group-hover:bg-blue-600 transition-colors">
+                                            <Linkedin className="w-5 h-5" />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">LinkedIn</span>
+                                            <span className="text-xs text-neutral-500 font-mono">Connect</span>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">LinkedIn</span>
-                                        <span className="text-xs text-neutral-500 font-mono">in/Irfan Ariff</span>
-                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transform duration-300" />
                                 </div>
-                                <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transform duration-300" />
-                            </div>
-                        </a>
+                            </a>
+                        )}
 
-                        <a href="mailto:mnifanmohdariff@gmail.com" className="block group">
-                            <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-neutral-900/50 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 group-hover:translate-x-1">
-                                <div className="flex items-center gap-4">
-                                    <div className="p-2 rounded-md bg-neutral-800 text-white group-hover:bg-red-500 transition-colors">
-                                        <Mail className="w-5 h-5" />
+                        {profile.email && (
+                            <a href={`mailto:${profile.email}`} className="block group">
+                                <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-neutral-900/50 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 group-hover:translate-x-1">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-2 rounded-md bg-neutral-800 text-white group-hover:bg-red-500 transition-colors">
+                                            <Mail className="w-5 h-5" />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-bold text-white group-hover:text-red-400 transition-colors">Email</span>
+                                            <span className="text-xs text-neutral-500 font-mono">Send Message</span>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-sm font-bold text-white group-hover:text-red-400 transition-colors">Email</span>
-                                        <span className="text-xs text-neutral-500 font-mono">mnifanmohdariff@gmail.com</span>
-                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transform duration-300" />
                                 </div>
-                                <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transform duration-300" />
-                            </div>
-                        </a>
+                            </a>
+                        )}
                     </div>
                 </div>
 

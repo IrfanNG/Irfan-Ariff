@@ -11,14 +11,22 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { ContactSection } from "@/components/contact-section";
+import { getProjects, getExperience, getTechStack, getProfile } from "@/lib/supabase/queries";
 
-export default function Home() {
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function Home() {
+  const projects = await getProjects();
+  const experience = await getExperience();
+  const techStack = await getTechStack();
+  const profile = await getProfile();
+
   return (
     <div className="flex flex-col gap-20 w-full relative">
       <Hero />
 
       {/* Projects Section - Bento Grid */}
-      <ProjectsSection />
+      <ProjectsSection projects={projects} />
 
 
 
@@ -30,20 +38,9 @@ export default function Home() {
             <span className="text-blue-500">~/tech_stack</span>
           </h2>
           <div className="flex flex-wrap gap-2 p-6 rounded-2xl border border-white/5 bg-neutral-900/30 backdrop-blur-sm">
-            {[
-              "Next.js (App Router)",
-              "Tailwind CSS",
-              "shadcn/ui",
-              "Framer Motion",
-              "PWA",
-              "Flutter",
-              "Dart",
-              "Supabase",
-              "Firebase (Firestore, Auth)",
-              "SQL Scripts"
-            ].map((tech) => (
-              <Badge key={tech} variant="secondary" className="bg-white/5 hover:bg-white/10 text-neutral-300 border border-white/5 transition-colors">
-                {tech}
+            {techStack.map((tech) => (
+              <Badge key={tech.id} variant="secondary" className="bg-white/5 hover:bg-white/10 text-neutral-300 border border-white/5 transition-colors">
+                {tech.name}
               </Badge>
             ))}
           </div>
@@ -56,12 +53,12 @@ export default function Home() {
             <span className="text-yellow-500">~/experience</span>
           </h2>
           <div className="p-6 rounded-2xl border border-white/5 bg-neutral-900/30 backdrop-blur-sm">
-            <Experience />
+            <Experience experiences={experience} />
           </div>
         </section>
       </div>
 
-      <ContactSection />
+      <ContactSection profile={profile} />
 
       <div className="h-20" /> {/* Spacer for scrolling */}
       <CommandPalette />
