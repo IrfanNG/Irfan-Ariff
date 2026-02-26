@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { ContactSection } from "@/components/contact-section";
+import { FreelanceServices } from "@/components/freelance-services";
 import { getProjects, getExperience, getTechStack, getProfile } from "@/lib/supabase/queries";
 
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -57,6 +58,8 @@ export default async function Home() {
           </div>
         </section>
       </div>
+
+      <FreelanceServices profile={profile} />
 
       <ContactSection profile={profile} />
 

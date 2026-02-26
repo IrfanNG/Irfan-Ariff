@@ -31,6 +31,7 @@ export const BentoGridItem = ({
     icon,
     children,
     isLatest = false,
+    id,
 }: {
     className?: string;
     title?: string | ReactNode;
@@ -39,9 +40,11 @@ export const BentoGridItem = ({
     icon?: ReactNode;
     children?: ReactNode;
     isLatest?: boolean;
+    id?: string;
 }) => {
     return (
         <motion.div
+            id={id}
             initial={isLatest
                 ? { opacity: 0, scale: 0.92, y: 30 }
                 : { opacity: 0, y: 20 }

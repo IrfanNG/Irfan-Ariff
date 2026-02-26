@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, Smartphone, Globe, Database, Layers, Wallet } from "lucide-react";
 import { BentoGrid, BentoGridItem } from "@/components/bento-grid";
@@ -20,6 +20,42 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
     const [isExpanded, setIsExpanded] = useState(false);
+
+    useEffect(() => {
+        const handleScrollToProject = (e: CustomEvent<{ slug: string }>) => {
+            const { slug } = e.detail;
+
+            // Expand projects if the target is hidden
+            const targetInExpanded = projects.slice(3).some(p => p.slug === slug);
+            if (targetInExpanded && !isExpanded) {
+                setIsExpanded(true);
+            }
+
+            // Small delay to allow AnimatePresence / re-render to complete
+            setTimeout(() => {
+                const el = document.getElementById(slug);
+                if (el) {
+                    const offset = 80; // Offset for navbar
+                    const elementPosition = el.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+
+                    // Add ping effect
+                    el.classList.add("project-ping");
+                    setTimeout(() => {
+                        el.classList.remove("project-ping");
+                    }, 1500);
+                }
+            }, 150);
+        };
+
+        window.addEventListener("scrollToProject" as any, handleScrollToProject);
+        return () => window.removeEventListener("scrollToProject" as any, handleScrollToProject);
+    }, [isExpanded, projects]);
 
     // If projects is empty from DB
     if (!projects || projects.length === 0) {
@@ -105,6 +141,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                         return (
                             <BentoGridItem
                                 key={project.id}
+                                id={project.slug}
                                 className={className}
                                 header={
                                     <>
@@ -141,6 +178,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                                 className="md:col-span-1 row-span-1 h-full show-overflow"
                             >
                                 <BentoGridItem
+                                    id={project.slug}
                                     className="h-full border-white/10 bg-neutral-900/50 backdrop-blur-md"
                                     header={renderHeader(project)}
                                     title={<ProjectHeader title={project.title} extension={getExtensionForCategory(project.category)} />}
