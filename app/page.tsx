@@ -26,10 +26,10 @@ export default async function Home() {
     <div className="flex flex-col gap-20 w-full relative">
       <Hero />
 
+      <FreelanceServices profile={profile} />
+
       {/* Projects Section - Bento Grid */}
       <ProjectsSection projects={projects} />
-
-
 
       <div className="grid md:grid-cols-3 gap-10">
         {/* Tech Stack */}
@@ -58,8 +58,6 @@ export default async function Home() {
           </div>
         </section>
       </div>
-
-      <FreelanceServices profile={profile} />
 
       <ContactSection profile={profile} />
 
