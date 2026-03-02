@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-    { name: "[ 01. projects ]", href: "#projects" },
-    { name: "[ 02. skills ]", href: "#skills" },
-    { name: "[ 03. services ]", href: "#services" },
+    { name: "[ 01. services ]", href: "#services" },
+    { name: "[ 02. projects ]", href: "#projects" },
+    { name: "[ 03. skills ]", href: "#skills" },
     { name: "[ 04. contact ]", href: "#contact" },
 ];
 

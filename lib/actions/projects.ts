@@ -18,6 +18,7 @@ export async function addProject(formData: FormData) {
     const live_url = formData.get('live_url') as string;
     const display_order = parseInt(formData.get('display_order') as string || '0', 10);
     const is_latest = formData.get('is_latest') === 'on';
+    const is_commercial = formData.get('is_commercial') === 'on';
 
     const tech_stack = tech_stack_raw.split(',').map(s => s.trim()).filter(s => s !== '');
 
@@ -33,6 +34,7 @@ export async function addProject(formData: FormData) {
         live_url: live_url || null,
         display_order,
         is_latest,
+        is_commercial,
     };
 
     const { error } = await supabase.from('projects').insert([newProject]);
@@ -65,6 +67,7 @@ export async function updateProject(id: string, formData: FormData) {
     const live_url = formData.get('live_url') as string;
     const display_order = parseInt(formData.get('display_order') as string || '0', 10);
     const is_latest = formData.get('is_latest') === 'on';
+    const is_commercial = formData.get('is_commercial') === 'on';
 
     const tech_stack = tech_stack_raw.split(',').map(s => s.trim()).filter(s => s !== '');
 
@@ -80,6 +83,7 @@ export async function updateProject(id: string, formData: FormData) {
         live_url: live_url || null,
         display_order,
         is_latest,
+        is_commercial,
     };
 
     const { error } = await supabase.from('projects').update(updatedProject).eq('id', id);

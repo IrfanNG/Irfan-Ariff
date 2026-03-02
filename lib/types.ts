@@ -9,6 +9,7 @@ export interface ProjectData {
     image_primary: string | null;
     image_secondary: string | null;
     is_latest: boolean;
+    is_commercial: boolean;
     github_url: string | null;
     live_url: string | null;
     display_order: number;
@@ -29,6 +30,21 @@ export interface TechStackData {
     name: string;
     category: 'frontend' | 'backend' | 'mobile' | 'tools' | null;
     display_order: number;
+}
+
+export interface ServiceData {
+    id: string;
+    title: string;
+    description: string | null;
+    icon_name: string;
+    display_order: number;
+    created_at: string;
+}
+
+export interface SiteConfigData {
+    id: string;
+    key: string;
+    value: string;
 }
 
 export interface ProfileData {

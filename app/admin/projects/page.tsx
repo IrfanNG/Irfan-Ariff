@@ -96,6 +96,7 @@ export default function ProjectsAdmin() {
                             <TableHead className="text-neutral-400 font-mono text-xs uppercase">Title</TableHead>
                             <TableHead className="text-neutral-400 font-mono text-xs uppercase hidden sm:table-cell">Category</TableHead>
                             <TableHead className="text-neutral-400 font-mono text-xs uppercase">Status</TableHead>
+                            <TableHead className="text-neutral-400 font-mono text-xs uppercase">COMMERCIAL</TableHead>
                             <TableHead className="text-neutral-400 font-mono text-xs uppercase text-right">Order</TableHead>
                             <TableHead className="text-right text-neutral-400 font-mono text-xs uppercase">Actions</TableHead>
                         </TableRow>
@@ -123,6 +124,13 @@ export default function ProjectsAdmin() {
                                             <span className="text-green-500 bg-green-500/10 px-2 py-1 rounded text-xs">LATEST</span>
                                         ) : (
                                             <span className="text-neutral-500 text-xs">STANDARD</span>
+                                        )}
+                                    </TableCell>
+                                    <TableCell>
+                                        {project.is_commercial ? (
+                                            <span className="text-amber-500 bg-amber-500/10 px-2 py-1 rounded text-xs font-bold ring-1 ring-amber-500/20">YES</span>
+                                        ) : (
+                                            <span className="text-neutral-600 text-[10px]">NO</span>
                                         )}
                                     </TableCell>
                                     <TableCell className="text-right text-neutral-400">{project.display_order}</TableCell>
@@ -218,14 +226,20 @@ export default function ProjectsAdmin() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 items-center bg-black/20 p-4 rounded-lg border border-white/5">
-                            <div className="space-y-2">
-                                <Label htmlFor="display_order" className="text-xs uppercase tracking-wider text-neutral-400">Order</Label>
-                                <Input id="display_order" name="display_order" type="number" defaultValue={editingProject?.display_order || "0"} className="bg-black border-white/5 text-white w-20" />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-black/20 p-4 rounded-lg border border-white/5">
+                            <div className="flex items-center gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="display_order" className="text-xs uppercase tracking-wider text-neutral-400">Order</Label>
+                                    <Input id="display_order" name="display_order" type="number" defaultValue={editingProject?.display_order || "0"} className="bg-black border-white/5 text-white w-20" />
+                                </div>
+                                <div className="flex items-center space-x-2 pt-6">
+                                    <Switch id="is_latest" name="is_latest" defaultChecked={editingProject?.is_latest} />
+                                    <Label htmlFor="is_latest" className="text-[10px] text-green-500 font-bold">LATEST_PUSH</Label>
+                                </div>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <Switch id="is_latest" name="is_latest" defaultChecked={editingProject?.is_latest} />
-                                <Label htmlFor="is_latest" className="text-xs text-green-500 font-bold">LATEST_PUSH</Label>
+                            <div className="flex items-center space-x-2 bg-amber-500/5 p-2 rounded border border-amber-500/10">
+                                <Switch id="is_commercial" name="is_commercial" defaultChecked={editingProject?.is_commercial} />
+                                <Label htmlFor="is_commercial" className="text-[10px] text-amber-500 font-bold uppercase tracking-tighter">Freelance_Showcase</Label>
                             </div>
                         </div>
 

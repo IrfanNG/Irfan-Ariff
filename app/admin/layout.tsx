@@ -11,9 +11,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 const adminLinks = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { name: 'Projects', href: '/admin/projects', icon: FileCode2 },
+    { name: 'Services', href: '/admin/services', icon: Briefcase },
     { name: 'Experience', href: '/admin/experience', icon: Briefcase },
     { name: 'Tech Stack', href: '/admin/tech-stack', icon: Terminal },
     { name: 'Profile', href: '/admin/profile', icon: User },
+    { name: 'Config', href: '/admin/config', icon: Terminal },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

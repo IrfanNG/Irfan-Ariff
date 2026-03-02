@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { ProjectData, ExperienceData, TechStackData, ProfileData } from '@/lib/types';
+import { ProjectData, ExperienceData, TechStackData, ProfileData, ServiceData, SiteConfigData } from '@/lib/types';
 
 export async function getProjects(): Promise<ProjectData[]> {
     const supabase = await createClient();
@@ -61,4 +61,38 @@ export async function getProfile(): Promise<ProfileData | null> {
     }
 
     return data as ProfileData;
+}
+
+export async function getServices(): Promise<ServiceData[]> {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from('services')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching services:', error);
+        return [];
+    }
+
+    return data as ServiceData[];
+}
+
+export async function getSiteConfig(): Promise<Record<string, string>> {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from('site_config')
+        .select('key, value');
+
+    if (error) {
+        console.error('Error fetching site config:', error);
+        return {};
+    }
+
+    const config: Record<string, string> = {};
+    data.forEach(item => {
+        config[item.key] = item.value;
+    });
+
+    return config;
 }

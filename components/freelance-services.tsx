@@ -1,22 +1,182 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase, Globe, Database, ArrowRight } from "lucide-react";
-import { ProfileData } from "@/lib/types";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
+import {
+    Briefcase,
+    Globe,
+    Database,
+    MessageSquare,
+    ArrowRight,
+    ChevronLeft,
+    ChevronRight,
+    Terminal as TerminalIcon
+} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ProfileData, ProjectData, ServiceData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-export function FreelanceServices({ profile }: { profile: ProfileData | null }) {
+const IconMap: Record<string, any> = {
+    Globe,
+    Briefcase,
+    Database,
+    MessageSquare,
+    Terminal: TerminalIcon,
+    ArrowRight
+};
+
+const SPRING_CONFIG = { stiffness: 300, damping: 30 };
+
+function ProjectCard({ proj, onClick }: { proj: any, onClick: () => void }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), SPRING_CONFIG);
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), SPRING_CONFIG);
+
+    const contentX = useSpring(useTransform(mouseX, [-0.5, 0.5], [15, -15]), SPRING_CONFIG);
+    const contentY = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), SPRING_CONFIG);
+
+    const [codeLines, setCodeLines] = useState<string[]>([]);
+
+    useEffect(() => {
+        const fileStructure = [
+            "src/app/page.tsx", "lib/supabase/client.ts", "components/ui/button.tsx",
+            "api/route.ts", "styles/globals.css", "utils/helpers.js"
+        ];
+        const generated = Array.from({ length: 15 }).map(() =>
+            `> ${fileStructure[Math.floor(Math.random() * fileStructure.length)]} ${Math.random().toString(16).slice(2, 8)}`
+        );
+        setCodeLines(generated);
+    }, []);
+
+    function handleMouseMove(e: React.MouseEvent) {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        mouseX.set(x);
+        mouseY.set(y);
+    }
+
+    function handleMouseLeave() {
+        mouseX.set(0);
+        mouseY.set(0);
+    }
+
+    return (
+        <motion.div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onClick={onClick}
+            style={{ rotateX, rotateY, perspective: 1000 }}
+            variants={{
+                hidden: { opacity: 0, scale: 0.9, y: 20 },
+                show: { opacity: 1, scale: 1, y: 0 }
+            }}
+            whileHover={{ y: -12, scale: 1.02 }}
+            transition={SPRING_CONFIG}
+            className={cn(
+                "w-full group relative aspect-video rounded-xl overflow-hidden border border-white/5 bg-neutral-900/50 cursor-pointer transition-all duration-500",
+                "hover:shadow-[0_0_40px_-5px_rgba(251,191,36,0.2)]",
+                "hover:border-white/20 hover:bg-neutral-900 shadow-2xl"
+            )}
+        >
+            {/* Micro-Terminal Reveal Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-5 group-hover:opacity-40 transition-opacity duration-700 overflow-hidden px-4 py-8">
+                <p className="font-mono text-[8px] leading-tight text-white/50 break-all select-none">
+                    {codeLines.map((line, i) => (
+                        <span key={i} className="block whitespace-nowrap">
+                            {line}
+                        </span>
+                    ))}
+                </p>
+            </div>
+
+            {/* Live Ping Indicator */}
+            <div className="absolute top-4 right-4 z-30 flex items-center gap-2">
+                <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-black/60 backdrop-blur-md border border-white/10 group-hover:border-white/20 transition-colors">
+                    <div className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </div>
+                    <span className="text-[8px] font-mono text-neutral-400 group-hover:text-neutral-200 uppercase tracking-tighter transition-colors">
+                        [ ACTIVE_DEPLOYMENT ]
+                    </span>
+                </div>
+            </div>
+
+            {/* Parallax Content Layer */}
+            <motion.div
+                style={{ x: contentX, y: contentY }}
+                className="absolute inset-0 z-10"
+            >
+                <img
+                    src={proj.image_primary || "/project-placeholder.png"}
+                    alt={proj.title}
+                    className="w-full h-full object-cover opacity-40 group-hover:opacity-90 transition-all duration-700 scale-105 group-hover:scale-110"
+                />
+            </motion.div>
+
+            {/* Content Overlay */}
+            <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-20">
+                <div className="flex items-center gap-2 mb-1.5 transform group-hover:translate-x-1 transition-transform">
+                    <TerminalIcon className="w-4 h-4 text-amber-500/70" />
+                    <p className="text-white font-bold text-base tracking-tight">{proj.title}</p>
+                </div>
+                <p className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.2em] opacity-80 group-hover:opacity-100 transition-opacity ml-6">
+                    {proj.category}
+                </p>
+            </div>
+
+            {/* High Impact Inner Glow on Hover */}
+            <div className={cn(
+                "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-30",
+                "shadow-[inset_0_0_60px_rgba(251,191,36,0.1)]"
+            )} />
+        </motion.div>
+    );
+}
+
+export function FreelanceServices({
+    profile,
+    services,
+    commercialProjects,
+    config
+}: {
+    profile: ProfileData | null;
+    services: ServiceData[];
+    commercialProjects: ProjectData[];
+    config?: Record<string, string>;
+}) {
     if (!profile) return null;
 
-    const whatsappNumber = profile.whatsapp_number
-        ? profile.whatsapp_number.replace(/\D/g, '') // remove non-digits
-        : "";
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const whatsappNumber = config?.whatsapp_number || profile.whatsapp_number || "601111111111";
 
     const message = "Hi Irfan, I'm interested in your freelance services for a project.";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
 
-    const handleScrollToProject = (slug: string) => {
-        window.dispatchEvent(new CustomEvent("scrollToProject", { detail: { slug } }));
+    const nextProject = () => {
+        if (commercialProjects.length === 0) return;
+        setCurrentIndex((prev) => (prev + 1) % commercialProjects.length);
+    };
+
+    const prevProject = () => {
+        if (commercialProjects.length === 0) return;
+        setCurrentIndex((prev) => (prev - 1 + commercialProjects.length) % commercialProjects.length);
     };
 
     const container = {
@@ -24,38 +184,21 @@ export function FreelanceServices({ profile }: { profile: ProfileData | null }) 
         show: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.1,
+                ...SPRING_CONFIG
             }
         }
     };
 
     const item = {
         hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0 }
+        show: { opacity: 1, y: 0, transition: SPRING_CONFIG }
     };
-
-    const clientProjects = [
-        {
-            name: "Qalam Irma",
-            image: "/Qalam Irma.png",
-            slug: "qalam irma",
-        },
-        {
-            name: "Habibah Kamal",
-            image: "/HabibahKamal.png",
-            slug: "habibahkamal",
-        },
-        {
-            name: "Raia Studio",
-            image: "/raia-studio.png",
-            slug: "raia studio",
-        }
-    ];
 
     return (
         <motion.section
             id="services"
-            className="space-y-10"
+            className="space-y-8"
             variants={container}
             initial="hidden"
             whileInView="show"
@@ -72,91 +215,120 @@ export function FreelanceServices({ profile }: { profile: ProfileData | null }) 
                 </motion.p>
             </div>
 
-            {/* Client Showcase Grid */}
+            {/* Client Showcase Carousel */}
             <div className="space-y-4">
-                <motion.h3 variants={item} className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-500">
-                    // live_deployments.sh
-                </motion.h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {clientProjects.map((proj) => (
-                        <motion.div
-                            key={proj.name}
-                            variants={item}
-                            whileHover={{ y: -5 }}
-                            onClick={() => handleScrollToProject(proj.slug)}
-                            className="group relative aspect-video rounded-xl overflow-hidden border border-white/5 bg-neutral-900/50 cursor-pointer"
+                <div className="flex items-center justify-between">
+                    <motion.h3 variants={item} className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-500">
+                        // live_deployments.sh
+                    </motion.h3>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={prevProject}
+                            className="p-2 rounded-full border border-white/10 bg-neutral-950 hover:bg-neutral-900 text-neutral-400 hover:text-white transition-all"
                         >
-                            <img
-                                src={proj.image}
-                                alt={proj.name}
-                                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                            />
-                            <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                                <p className="text-white font-bold text-sm">{proj.name}</p>
-                                <p className="text-amber-500 font-mono text-[10px]">{proj.type}</p>
+                            <ChevronLeft className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={nextProject}
+                            className="p-2 rounded-full border border-white/10 bg-neutral-950 hover:bg-neutral-900 text-neutral-400 hover:text-white transition-all"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </button>
+                    </div>
+                </div>
+
+                <div className="relative overflow-hidden -mx-4 px-4 md:mx-0 md:px-0">
+                    <motion.div
+                        animate={{ x: `-${currentIndex * (isMobile ? 100 : 33.33)}%` }}
+                        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                        className="flex gap-4 md:gap-6"
+                        style={{ width: "100%" }}
+                    >
+                        {commercialProjects.length > 0 ? (
+                            commercialProjects.map((proj) => (
+                                <div key={proj.id} className="min-w-full md:min-w-[calc(33.33%-16px)] shrink-0">
+                                    <ProjectCard proj={proj} onClick={() => { }} />
+                                </div>
+                            ))
+                        ) : (
+                            <div className="w-full p-12 border border-dashed border-white/5 rounded-xl text-center text-neutral-600 font-mono text-xs uppercase tracking-widest">
+                                [ NO_COMMERCIAL_PROJECTS_STAGED ]
                             </div>
-                        </motion.div>
-                    ))}
+                        )}
+                    </motion.div>
                 </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
-                {/* E-commerce & Landing Pages */}
-                <motion.div
-                    variants={item}
-                    whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-xl border border-white/5 bg-neutral-900/30 backdrop-blur-sm space-y-4 flex flex-col justify-between"
-                >
-                    <div className="space-y-4">
-                        <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
-                            <Globe className="w-5 h-5 text-cyan-400" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold text-white mb-2">E-commerce & Landing Pages</h3>
-                            <p className="text-sm text-neutral-400 leading-relaxed">
-                                High-end landing pages and e-commerce stores designed for maximum conversion and professional impact.
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
+                {services.map((service) => {
+                    const Icon = IconMap[service.icon_name] || Globe;
 
-                {/* Custom Management Systems */}
-                <motion.div
-                    variants={item}
-                    whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-xl border border-white/5 bg-neutral-900/30 backdrop-blur-sm space-y-4 flex flex-col justify-between"
-                >
-                    <div className="space-y-4">
-                        <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
-                            <Database className="w-5 h-5 text-purple-400" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold text-white mb-2">Custom Management Systems</h3>
-                            <p className="text-sm text-neutral-400 leading-relaxed">
-                                Tailored admin dashboards and booking systems (like Raia Studio) to streamline your daily operations.
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
+                    // Category-based theme mapping
+                    const theme = (() => {
+                        const title = service.title.toLowerCase();
+                        if (title.includes('landing') || title.includes('web')) return { color: 'cyan', glow: 'shadow-cyan-500/20', border: 'border-t-cyan-500/50' };
+                        if (title.includes('cms') || title.includes('management') || title.includes('system')) return { color: 'purple', glow: 'shadow-purple-500/20', border: 'border-t-purple-500/50' };
+                        if (title.includes('commerce') || title.includes('store') || title.includes('shop')) return { color: 'emerald', glow: 'shadow-emerald-500/20', border: 'border-t-emerald-500/50' };
+                        return { color: 'amber', glow: 'shadow-amber-500/20', border: 'border-t-amber-500/50' };
+                    })();
 
-                {/* Performance & SEO */}
-                <motion.div
-                    variants={item}
-                    whileHover={{ scale: 1.02 }}
-                    className="p-6 rounded-xl border border-white/5 bg-neutral-900/30 backdrop-blur-sm space-y-4 flex flex-col justify-between"
-                >
-                    <div className="space-y-4">
-                        <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center border border-green-500/20">
-                            <ArrowRight className="w-5 h-5 text-green-400 -rotate-45" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold text-white mb-2">Performance & SEO</h3>
-                            <p className="text-sm text-neutral-400 leading-relaxed">
-                                Optimizing your web presence for lightning-fast speeds and top Google search rankings (SEO).
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
+                    const colorMap: Record<string, string> = {
+                        cyan: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+                        purple: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+                        emerald: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+                        amber: 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+                    };
+
+                    return (
+                        <motion.div
+                            key={service.id}
+                            variants={item}
+                            whileHover={{ scale: 1.02, y: -5 }}
+                            className={cn(
+                                "p-6 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md space-y-4 flex flex-col justify-between group transition-all relative overflow-hidden",
+                                theme.border,
+                                "hover:border-white/20",
+                                `hover:${theme.glow} hover:shadow-2xl`
+                            )}
+                        >
+                            {/* Scanning Light Effect */}
+                            <motion.div
+                                className="absolute inset-x-0 h-[100px] bg-gradient-to-b from-transparent via-white/5 to-transparent z-0 pointer-events-none"
+                                animate={{ top: ["-100%", "200%"] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                            />
+
+                            <div className="space-y-4 relative z-10">
+                                <motion.div
+                                    className={cn(
+                                        "w-12 h-12 rounded-lg flex items-center justify-center border transition-all duration-500",
+                                        colorMap[theme.color]
+                                    )}
+                                    animate={{ scale: [1, 1.05, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    <Icon className="w-6 h-6" />
+                                </motion.div>
+
+                                <div>
+                                    <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:translate-x-1 transition-transform duration-300">
+                                        {service.title}
+                                    </h3>
+                                    <p className="text-sm text-neutral-400 leading-relaxed font-light group-hover:text-neutral-300 transition-colors duration-300">
+                                        {service.description}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Corner Tech Detail */}
+                            <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-100 transition-opacity">
+                                <div className="text-[8px] font-mono text-neutral-500 uppercase tracking-tighter">
+                                    [ SVC_IDENT: {service.id.slice(0, 8)} ]
+                                </div>
+                            </div>
+                        </motion.div>
+                    );
+                })}
             </div>
 
             <motion.div
@@ -169,8 +341,7 @@ export function FreelanceServices({ profile }: { profile: ProfileData | null }) 
                         # value_proposition.md
                     </div>
                     <p className="text-sm text-neutral-300 font-light leading-relaxed max-w-2xl">
-                        Helping local business owners own fast, manageable, and professional web systems.
-                        <span className="text-white font-medium"> As a Software Engineering student</span>, I offer modern digital solutions at competitive rates to fuel your business growth.
+                        {config?.value_proposition || "Helping local business owners own fast, manageable, and professional web systems."}
                     </p>
                 </div>
 
