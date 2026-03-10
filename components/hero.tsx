@@ -74,12 +74,35 @@ export function Hero() {
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 3, duration: 0.5 }}
+                transition={{ delay: 2.5, duration: 0.5 }}
                 className="mt-8 text-gray-400 text-sm sm:text-base max-w-2xl leading-relaxed font-sans"
             >
                 <p>
                     Developing functional software for real-world needs. From landing pages to community ecosystems, I build with a focus on clean code and minimal design.
                 </p>
+            </motion.div>
+
+            {/* Prominent CTAs for Recruiters */}
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 3, duration: 0.5 }}
+                className="flex flex-wrap gap-4 mt-4"
+            >
+                <a
+                    href="/my-cv.pdf"
+                    target="_blank"
+                    className="px-6 py-3 bg-white text-black hover:bg-neutral-200 transition-all font-bold text-xs uppercase tracking-widest flex items-center gap-2 group"
+                >
+                    <span className="relative z-10">[ VIEW_RESUME ]</span>
+                </a>
+                <a
+                    href="https://wa.me/60183823063?text=Hello%20Irfan,%20I%20saw%20your%20portfolio..."
+                    target="_blank"
+                    className="px-6 py-3 border border-white/10 hover:border-white/30 text-white hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest"
+                >
+                    [ CONNECT_NOW ]
+                </a>
             </motion.div>
         </div>
     );

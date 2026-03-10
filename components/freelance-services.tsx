@@ -259,72 +259,57 @@ export function FreelanceServices({
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
                 {services.map((service) => {
                     const Icon = IconMap[service.icon_name] || Globe;
 
                     // Category-based theme mapping
                     const theme = (() => {
                         const title = service.title.toLowerCase();
-                        if (title.includes('landing') || title.includes('web')) return { color: 'cyan', glow: 'shadow-cyan-500/20', border: 'border-t-cyan-500/50' };
-                        if (title.includes('cms') || title.includes('management') || title.includes('system')) return { color: 'purple', glow: 'shadow-purple-500/20', border: 'border-t-purple-500/50' };
-                        if (title.includes('commerce') || title.includes('store') || title.includes('shop')) return { color: 'emerald', glow: 'shadow-emerald-500/20', border: 'border-t-emerald-500/50' };
-                        return { color: 'amber', glow: 'shadow-amber-500/20', border: 'border-t-amber-500/50' };
+                        if (title.includes('landing') || title.includes('web')) return { color: 'cyan', glow: 'shadow-cyan-500/20', border: 'border-l-cyan-500/50' };
+                        if (title.includes('cms') || title.includes('management') || title.includes('system')) return { color: 'purple', glow: 'shadow-purple-500/20', border: 'border-l-purple-500/50' };
+                        if (title.includes('commerce') || title.includes('store') || title.includes('shop')) return { color: 'emerald', glow: 'shadow-emerald-500/20', border: 'border-l-emerald-500/50' };
+                        return { color: 'amber', glow: 'shadow-amber-500/20', border: 'border-l-amber-500/50' };
                     })();
 
                     const colorMap: Record<string, string> = {
-                        cyan: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-                        purple: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-                        emerald: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
-                        amber: 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+                        cyan: 'text-cyan-400 group-hover:text-cyan-300',
+                        purple: 'text-purple-400 group-hover:text-purple-300',
+                        emerald: 'text-emerald-400 group-hover:text-emerald-300',
+                        amber: 'text-amber-400 group-hover:text-amber-300'
                     };
 
                     return (
                         <motion.div
                             key={service.id}
                             variants={item}
-                            whileHover={{ scale: 1.02, y: -5 }}
+                            whileHover={{ scale: 1.01, x: 5 }}
                             className={cn(
-                                "p-6 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md space-y-4 flex flex-col justify-between group transition-all relative overflow-hidden",
+                                "p-6 rounded-xl border border-white/5 bg-neutral-900/30 backdrop-blur-md flex gap-6 items-start group transition-all relative overflow-hidden",
                                 theme.border,
-                                "hover:border-white/20",
-                                `hover:${theme.glow} hover:shadow-2xl`
+                                "border-l-4",
+                                "hover:border-white/10 hover:bg-neutral-900/50"
                             )}
                         >
-                            {/* Scanning Light Effect */}
-                            <motion.div
-                                className="absolute inset-x-0 h-[100px] bg-gradient-to-b from-transparent via-white/5 to-transparent z-0 pointer-events-none"
-                                animate={{ top: ["-100%", "200%"] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                            />
-
-                            <div className="space-y-4 relative z-10">
-                                <motion.div
-                                    className={cn(
-                                        "w-12 h-12 rounded-lg flex items-center justify-center border transition-all duration-500",
-                                        colorMap[theme.color]
-                                    )}
-                                    animate={{ scale: [1, 1.05, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                >
-                                    <Icon className="w-6 h-6" />
-                                </motion.div>
-
-                                <div>
-                                    <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:translate-x-1 transition-transform duration-300">
-                                        {service.title}
-                                    </h3>
-                                    <p className="text-sm text-neutral-400 leading-relaxed font-light group-hover:text-neutral-300 transition-colors duration-300">
-                                        {service.description}
-                                    </p>
-                                </div>
+                            <div className={cn(
+                                "w-12 h-12 shrink-0 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 transition-all duration-300 group-hover:scale-110",
+                                colorMap[theme.color]
+                            )}>
+                                <Icon className="w-6 h-6" />
                             </div>
 
-                            {/* Corner Tech Detail */}
-                            <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-100 transition-opacity">
-                                <div className="text-[8px] font-mono text-neutral-500 uppercase tracking-tighter">
-                                    [ SVC_IDENT: {service.id.slice(0, 8)} ]
+                            <div className="space-y-1 relative z-10 flex-1">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-base font-bold text-white tracking-tight">
+                                        {service.title}
+                                    </h3>
+                                    <span className="text-[10px] font-mono text-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        SVC_ID: {service.id.slice(0, 4)}
+                                    </span>
                                 </div>
+                                <p className="text-sm text-neutral-400 leading-relaxed font-light group-hover:text-neutral-300 transition-colors duration-300">
+                                    {service.description}
+                                </p>
                             </div>
                         </motion.div>
                     );

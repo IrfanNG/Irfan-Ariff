@@ -79,7 +79,7 @@ export function ContactSection({
                                         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                                             <span className="text-sm font-bold text-white group-hover:text-amber-400 transition-colors uppercase tracking-tight">WhatsApp Junction</span>
                                             <span className="text-[8px] sm:text-[9px] font-mono text-amber-500 bg-amber-500/20 px-1.5 py-0.5 rounded border border-amber-500/30 animate-pulse whitespace-nowrap w-fit">
-                                                [ FAST_RESPONSE: FREELANCE_INQUIRY ]
+                                                [ FAST_RESPONSE ]
                                             </span>
                                         </div>
                                         <span className="text-xs text-neutral-500 font-mono">Encrypted Chat Protocol</span>

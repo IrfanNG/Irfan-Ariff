@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
     { name: "[ 01. services ]", href: "#services" },
     { name: "[ 02. projects ]", href: "#projects" },
-    { name: "[ 03. skills ]", href: "#skills" },
+    { name: "[ 03. experience ]", href: "#experience" },
     { name: "[ 04. contact ]", href: "#contact" },
 ];
 
@@ -72,21 +72,53 @@ export function Navbar({ profile }: { profile: ProfileData | null }) {
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center space-x-8">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={(e) => scrollToSection(e, link.href)}
-                                    className="relative group font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors"
-                                >
-                                    {link.name}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full" />
-                                </a>
-                            ))}
+                            <div className="flex items-center space-x-8">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        onClick={(e) => scrollToSection(e, link.href)}
+                                        className="relative group font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors"
+                                    >
+                                        {link.name}
+                                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full" />
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Sticky CV Button - Appears on scroll */}
+                            <AnimatePresence>
+                                {isScrolled && (
+                                    <motion.a
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 20 }}
+                                        href="/my-cv.pdf"
+                                        target="_blank"
+                                        className="px-4 py-2 bg-green-500 text-black font-mono text-[10px] font-bold uppercase tracking-widest rounded hover:bg-green-400 transition-colors"
+                                    >
+                                        [ CV ]
+                                    </motion.a>
+                                )}
+                            </AnimatePresence>
                         </div>
 
-                        {/* Mobile Menu Button */}
-                        <div className="md:hidden">
+                        {/* Mobile Menu Button / CV Combo */}
+                        <div className="md:hidden flex items-center gap-4">
+                            <AnimatePresence>
+                                {isScrolled && (
+                                    <motion.a
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.8 }}
+                                        href="/my-cv.pdf"
+                                        target="_blank"
+                                        className="px-3 py-1.5 bg-green-500 text-black font-mono text-[10px] font-bold uppercase tracking-widest rounded"
+                                    >
+                                        CV
+                                    </motion.a>
+                                )}
+                            </AnimatePresence>
                             <Button
                                 variant="ghost"
                                 size="icon"
