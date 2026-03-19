@@ -43,7 +43,7 @@ export default async function Home() {
       />
 
       {/* Projects Section - Bento Grid */}
-      <ProjectsSection projects={projects} />
+      <ProjectsSection projects={projects} githubUrl={profile?.github_url || undefined} />
 
       {/* Experience - Full Width */}
       <section id="experience" className="col-span-3 space-y-6">

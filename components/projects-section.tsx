@@ -16,9 +16,10 @@ import { ProjectData } from "@/lib/types";
 
 interface ProjectsSectionProps {
     projects: ProjectData[];
+    githubUrl?: string;
 }
 
-export function ProjectsSection({ projects }: ProjectsSectionProps) {
+export function ProjectsSection({ projects, githubUrl }: ProjectsSectionProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [activeFilter, setActiveFilter] = useState<string>('mobile');
 
@@ -249,33 +250,52 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 </AnimatePresence>
             </div>
 
-            {/* Toggle Button */}
-            <AnimatePresence>
-                {hasMore && (
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 relative z-20">
+                <AnimatePresence>
+                    {hasMore && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                        >
+                            <Button
+                                variant="outline"
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="border-green-900/30 text-green-500 hover:text-green-400 hover:bg-green-950/30 hover:border-green-500/50 transition-all font-mono text-xs tracking-wider"
+                            >
+                                {isExpanded ? (
+                                    <>
+                                        [ SHOW_LESS ]
+                                    </>
+                                ) : (
+                                    <>
+                                        [ LS_ALL_FILES ]
+                                    </>
+                                )}
+                            </Button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {githubUrl && (
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        className="flex justify-center pt-4 relative z-20"
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                     >
                         <Button
                             variant="outline"
-                            onClick={() => setIsExpanded(!isExpanded)}
-                            className="border-green-900/30 text-green-500 hover:text-green-400 hover:bg-green-950/30 hover:border-green-500/50 transition-all font-mono text-xs tracking-wider"
+                            asChild
+                            className="border-green-500/20 text-green-500 hover:text-green-400 hover:bg-green-500/10 hover:border-green-500/50 transition-all font-mono text-xs tracking-wider shadow-[0_0_15px_rgba(34,197,94,0.1)]"
                         >
-                            {isExpanded ? (
-                                <>
-                                    [ SHOW_LESS ]
-                                </>
-                            ) : (
-                                <>
-                                    [ LS_ALL_FILES ]
-                                </>
-                            )}
+                            <a href={githubUrl.startsWith('http') ? githubUrl : `https://${githubUrl}`} target="_blank" rel="noopener noreferrer">
+                                [ VIEW_GITHUB_ARCHIVE ]
+                            </a>
                         </Button>
                     </motion.div>
                 )}
-            </AnimatePresence>
+            </div>
         </section>
     );
 }
