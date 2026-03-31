@@ -19,13 +19,24 @@ import { CertificatesSection } from "@/components/certificates-section";
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
-  const projects = await getProjects();
-  const experience = await getExperience();
-  const profile = await getProfile();
-  const services = await getServices();
-  const config = await getSiteConfig();
-  const education = await getEducation();
-  const certificates = await getCertificates();
+  // Parallel data fetching for better performance
+  const [
+    projects,
+    experience,
+    profile,
+    services,
+    config,
+    education,
+    certificates
+  ] = await Promise.all([
+    getProjects(),
+    getExperience(),
+    getProfile(),
+    getServices(),
+    getSiteConfig(),
+    getEducation(),
+    getCertificates()
+  ]);
 
   // Filter projects for commercial showcase
   const commercialProjects = projects.filter(p => p.is_commercial);
