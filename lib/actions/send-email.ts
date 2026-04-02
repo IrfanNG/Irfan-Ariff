@@ -16,7 +16,7 @@ export async function sendEmail(prevState: any, formData: FormData) {
 
         const { data, error } = await resend.emails.send({
             from: "onboarding@resend.dev", // Or your verified domain
-            to: "mnifanmohdariff@gmail.com",
+            to: process.env.ADMIN_EMAIL || "mnifanmohdariff@gmail.com",
             replyTo: email,
             subject: `New Contact Form Submission from ${name}`,
             text: message, // Plain text fallback
