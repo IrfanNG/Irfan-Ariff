@@ -1,29 +1,26 @@
-import { Hero } from "@/components/hero";
-import { Badge } from "@/components/ui/badge";
-import { Experience } from "@/components/experience";
-import { CommandPalette } from "@/components/command-palette";
-import { MobileShowcase } from "@/components/mobile-showcase";
-import { BrowserMockup } from "@/components/browser-mockup";
-import { ProjectsSection } from "@/components/projects-section";
-import {
-  Code2
-} from "lucide-react";
-import Image from "next/image";
-import { ContactSection } from "@/components/contact-section";
-import { FreelanceServices } from "@/components/freelance-services";
+﻿import { NoirHero } from "@/src/ui/sections/NoirHero";
+import { NoirProjects } from "@/src/ui/sections/NoirProjects";
 import { VisitTracker } from "@/components/analytics/visit-tracker";
-import { getProjects, getExperience, getTechStack, getProfile, getServices, getSiteConfig, getEducation, getCertificates } from "@/lib/supabase/queries";
-import { EducationSection } from "@/components/education-section";
-import { CertificatesSection } from "@/components/certificates-section";
 import { createClient } from "@/lib/supabase/server";
+import { 
+  getProjects, 
+  getExperience, 
+  getProfile, 
+  getServices, 
+  getSiteConfig, 
+  getEducation, 
+  getCertificates 
+} from "@/lib/supabase/queries";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+import { Experience } from "@/components/experience";
+import { ContactSection } from "@/components/contact-section";
+import { CommandPalette } from "@/components/command-palette";
+
+export const revalidate = 60;
 
 export default async function Home() {
-  // Initialize Supabase client once for elite performance (v3.0)
   const supabase = await createClient();
 
-  // Parallel data fetching with singleton client
   const [
     projects,
     experience,
@@ -42,42 +39,30 @@ export default async function Home() {
     getCertificates(supabase)
   ]);
 
-  // Filter projects for commercial showcase
-  const commercialProjects = projects.filter(p => p.is_commercial);
-
   return (
-    <div className="flex flex-col gap-20 w-full relative">
+    <div className="flex flex-col w-full relative">
       <VisitTracker />
-      <Hero />
+      
+      {/* PHASE 3 STRIKE: NOIR HERO */}
+      <NoirHero />
 
-      <FreelanceServices
-        profile={profile}
-        services={services}
-        commercialProjects={commercialProjects}
-        config={config}
-      />
+      {/* PHASE 3 STRIKE: CINEMATIC PROJECTS */}
+      <NoirProjects projects={projects} />
 
-      {/* Projects Section - Bento Grid */}
-      <ProjectsSection projects={projects} githubUrl={profile?.github_url || undefined} />
+      <div className="space-y-32 flex flex-col w-full px-6 md:px-12 lg:px-24">
+        <section id="experience" className="space-y-8">
+          <h2 className="text-sm font-mono tracking-[0.5em] text-elite-teal flex items-center gap-4 uppercase opacity-60">
+            <span className="w-12 h-[1px] bg-elite-teal/30" />
+            Experience_Archives
+          </h2>
+          <div className="p-8 rounded-sm border border-white/5 bg-black/20 backdrop-blur-3xl">
+            <Experience experiences={experience} />
+          </div>
+        </section>
 
-      {/* Experience - Full Width */}
-      <section id="experience" className="col-span-3 space-y-6">
-        <h2 className="text-xl font-bold tracking-tight text-white/90 flex items-center gap-2">
-          <Code2 className="w-5 h-5 text-yellow-500" />
-          <span className="text-yellow-500">~/experience</span>
-        </h2>
-        <div className="p-8 rounded-2xl border border-white/10 bg-neutral-900/30 backdrop-blur-md">
-          <Experience experiences={experience} />
-        </div>
-      </section>
+        <ContactSection profile={profile} config={config} />
+      </div>
 
-      {/* Education & Certificates */}
-      <EducationSection education={education} />
-      <CertificatesSection certificates={certificates} />
-
-      <ContactSection profile={profile} config={config} />
-
-      <div className="h-20" /> {/* Spacer for scrolling */}
       <CommandPalette />
     </div>
   );

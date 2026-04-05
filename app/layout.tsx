@@ -1,23 +1,30 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+﻿import type { Metadata } from "next";
+import { Inter, JetBrains_Mono, Cormorant_Garamond, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { Navbar } from "@/components/navbar";
 import { getProfile } from "@/lib/supabase/queries";
 import { Toaster } from "@/components/ui/sonner";
+import { FluidBackground } from "@/src/ui/components/canvas/FluidBackground";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const interTight = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
+const cormorant = Cormorant_Garamond({ 
+  subsets: ["latin"], 
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-cormorant" 
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.irfanariff.com"),
   title: {
-    default: "Irfan Ariff | Software Developer",
+    default: "Irfan Ariff | Elite Full-Stack Orchestrator",
     template: "%s | Irfan Ariff",
   },
   description:
-    "Software Engineering student at UniKL MIIT actively seeking 2026 internships. Freelance developer offering custom web systems.",
+    "Engineering Excellence. Orchestrated. High-fidelity digital ecosystems for premium brands and startups.",
   keywords: [
     "Irfan Ariff", "software engineer", "freelance developer",
     "web development", "mobile app development", "UniKL MIIT",
@@ -45,13 +52,12 @@ export const metadata: Metadata = {
     images: ["/api/og"],
   },
   robots: {
-    index: true,
-    follow: true,
+    index: true, follow: true,
     googleBot: { index: true, follow: true },
   },
 };
 
-export const revalidate = 60; // Ensure Vercel invalidates the cache every 60 seconds
+export const revalidate = 60;
 
 export default async function RootLayout({
   children,
@@ -60,58 +66,19 @@ export default async function RootLayout({
 }>) {
   const profile = await getProfile();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "name": "Irfan Ariff",
-        "jobTitle": "Software Engineering Student & Freelance Developer",
-        "affiliation": { "@type": "CollegeOrUniversity", "name": "UniKL MIIT" },
-        "url": "https://www.irfanariff.com",
-        "knowsAbout": ["Next.js", "Flutter", "Supabase", "Tailwind CSS", "System Architecture", "Web Development", "Mobile App Development"],
-        "description": "Software Engineering student at UniKL MIIT and Freelance Developer specializing in custom web and mobile systems for SMEs and Startups."
-      },
-      {
-        "@type": "ProfessionalService",
-        "name": "Irfan Ariff — Freelance Development",
-        "image": "https://www.irfanariff.com/api/og",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Malaysia",
-          "addressCountry": "MY"
-        },
-        "provider": { "@type": "Person", "name": "Irfan Ariff" },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Development Services",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Web Systems (Next.js, Supabase)" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development (Flutter)" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce Redesign & CMS Solutions" } }
-          ]
-        }
-      }
-    ]
-  };
-
   return (
-    <html lang="en" className="dark">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
+    <html lang="en" className="dark scroll-smooth">
       <body className={cn(
-        "min-h-screen bg-black font-sans antialiased text-white relative overflow-x-hidden selection:bg-white selection:text-black",
+        "min-h-screen bg-[#030303] font-sans antialiased text-white relative overflow-x-hidden selection:bg-white selection:text-black",
         inter.variable,
-        jetbrainsMono.variable
+        interTight.variable,
+        jetbrainsMono.variable,
+        cormorant.variable
       )}>
-        <div className="fixed inset-0 pointer-events-none z-[100] scanline opacity-5" />
+        <div className="grain-overlay" />
+        <FluidBackground />
         <Navbar profile={profile} />
-        <main className="relative flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-24 md:pt-32">
+        <main className="relative flex flex-col w-full min-h-screen pt-0 md:pt-0 lg:pt-0">
           {children}
         </main>
         <Toaster theme="dark" position="bottom-right" />
