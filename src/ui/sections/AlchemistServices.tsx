@@ -10,8 +10,11 @@ interface AlchemistServicesProps {
 
 export function AlchemistServices({ services }: AlchemistServicesProps) {
   return (
-    <section id="services" className="w-full py-40 px-6 md:px-12 lg:px-24 bg-transparent relative z-10">
-      <div className="flex flex-col gap-20">
+    <section id="services" className="w-full py-40 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-[#030303] to-[#0a0a0a] relative z-10 overflow-hidden">
+      {/* Animated Background Grid Pattern */}
+      <div className="absolute inset-0 bg-blueprint-grid opacity-60 pointer-events-none" />
+      
+      <div className="flex flex-col gap-20 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
           <h2 className="font-sans font-black text-6xl md:text-8xl uppercase tracking-tighter text-white">
             The <span className="text-cyan-500">Arsenal.</span>

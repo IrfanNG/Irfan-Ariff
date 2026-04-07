@@ -13,8 +13,11 @@ export function AlchemistProjects({ projects }: AlchemistProjectsProps) {
   const displayProjects = projects.slice(0, 4);
 
   return (
-    <section id="projects" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10">
-      <div className="flex flex-col gap-32">
+    <section id="projects" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10 bg-black">
+      {/* Radial Spotlight Overlay */}
+      <div className="absolute inset-0 bg-spotlight-radial pointer-events-none" />
+      
+      <div className="flex flex-col gap-32 relative z-10">
         <div className="space-y-4">
           <span className="font-mono text-[10px] tracking-[0.4em] text-cyan-500 uppercase">Mutation_Registry</span>
           <h2 className="font-sans font-black text-6xl md:text-9xl uppercase tracking-tighter text-white leading-none">

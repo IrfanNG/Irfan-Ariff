@@ -28,8 +28,12 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
   const [state, formAction] = useActionState(sendEmail, initialState);
 
   return (
-    <section id="contact" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10">
-      <div className="flex flex-col gap-24">
+    <>
+      <section id="contact" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10 bg-black overflow-hidden">
+        {/* Animated Terminal Scanlines Overlay */}
+        <div className="absolute inset-0 bg-scanlines opacity-70 pointer-events-none" />
+        
+        <div className="flex flex-col gap-24 relative z-10">
         <h2 className="font-sans font-black text-6xl md:text-[12vw] uppercase tracking-tighter text-white leading-[0.8]">
           Let&apos;s <span className="text-transparent" style={{ WebkitTextStroke: "1px white" }}>Transmute</span> <br />
           The Future.
@@ -79,29 +83,38 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
           </div>
         </div>
       </div>
+      </section>
       
-      <div className="mt-40 pt-12 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center gap-8">
-        <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
-           <span className="font-mono text-[10px] tracking-[0.3em] text-zinc-300">
-             ALCHIMISTRA // ORCHESTRATING THE DIGITAL ETHER
-           </span>
-           <span className="hidden md:inline font-mono text-zinc-600">|</span>
-           <span className="font-mono text-[10px] tracking-[0.3em] text-cyan-400 flex items-center gap-2">
-             <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-             AVAILABLE FOR MISSIONS
-           </span>
+      <footer className="relative w-full py-12 px-6 md:px-12 lg:px-24 overflow-hidden border-t border-white/10">
+        {/* Ambient Glowing Orbs (Hero Vibe) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-0">
+          <div className="absolute top-0 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-blue-500/10 rounded-full blur-[120px] animate-pulse delay-1000" />
         </div>
-        
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          <span className="font-mono text-[10px] tracking-[0.3em] text-zinc-400">LOC: KUALA LUMPUR, MY</span>
-          <span className="hidden md:inline font-mono text-zinc-600">|</span>
-          <div className="flex items-center gap-6">
-            <a href="https://github.com/irfanng" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] tracking-[0.3em] text-zinc-300 hover:text-cyan-400 transition-colors">GITHUB</a>
-            <a href="https://www.linkedin.com/in/irfan-ariff-20691a264" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] tracking-[0.3em] text-zinc-300 hover:text-cyan-400 transition-colors">LINKEDIN</a>
+
+        <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+             <span className="font-mono text-[10px] tracking-[0.3em] text-zinc-300">
+               ALCHIMISTRA // ORCHESTRATING THE DIGITAL ETHER
+             </span>
+             <span className="hidden md:inline font-mono text-zinc-600">|</span>
+             <span className="font-mono text-[10px] tracking-[0.3em] text-cyan-400 flex items-center gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+               AVAILABLE FOR MISSIONS
+             </span>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <span className="font-mono text-[10px] tracking-[0.3em] text-zinc-400">LOC: KUALA LUMPUR, MY</span>
+            <span className="hidden md:inline font-mono text-zinc-600">|</span>
+            <div className="flex items-center gap-6">
+              <a href="https://github.com/irfanng" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] tracking-[0.3em] text-zinc-300 hover:text-cyan-400 transition-colors">GITHUB</a>
+              <a href="https://www.linkedin.com/in/irfan-ariff-20691a264" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] tracking-[0.3em] text-zinc-300 hover:text-cyan-400 transition-colors">LINKEDIN</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </footer>
+    </>
   );
 }
 

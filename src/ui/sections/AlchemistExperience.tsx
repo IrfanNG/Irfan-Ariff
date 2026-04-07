@@ -9,8 +9,11 @@ interface AlchemistExperienceProps {
 
 export function AlchemistExperience({ experiences }: AlchemistExperienceProps) {
   return (
-    <section id="experience" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10">
-      <div className="flex flex-col gap-24">
+    <section id="experience" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10 bg-timeline-gradient overflow-hidden">
+      {/* Animated Vertical Timeline Axis Glow */}
+      <div className="bg-timeline-axis opacity-80" />
+      
+      <div className="flex flex-col gap-24 relative z-10">
         <div className="space-y-4">
           <span className="font-mono text-[10px] tracking-[0.4em] text-cyan-500 uppercase">Deployment_History</span>
           <h2 className="font-sans font-black text-6xl md:text-9xl uppercase tracking-tighter text-white leading-none">

@@ -35,7 +35,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="flex flex-col w-full relative">
+    <div className="flex flex-col w-full max-w-[100vw] relative overflow-x-hidden">
       <VisitTracker />
       
       {/* OPERATION ALCHEMIST: THE COMPLETE STRIKE */}
