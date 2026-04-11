@@ -1,4 +1,4 @@
-﻿import { AlchemistHero } from "@/src/ui/sections/AlchemistHero";
+import { AlchemistHero } from "@/src/ui/sections/AlchemistHero";
 import { AlchemistServices } from "@/src/ui/sections/AlchemistServices";
 import { AlchemistProjects } from "@/src/ui/sections/AlchemistProjects";
 import { AlchemistExperience } from "@/src/ui/sections/AlchemistExperience";

@@ -1,16 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import anime from 'animejs/lib/anime.es.js';
 
 export function AlchemistHero() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // ELITE TYPOGRAPHY REVEAL STRATORY
+    const tl = anime.timeline({
+      easing: 'easeOutExpo',
+      duration: 1200,
+    });
+
+    // 1. Badge Reveal (Framer handles this initially, but we can sync or leave)
+    
+    // 2. Main Title Line 1 (Digital)
+    tl.add({
+      targets: '.hero-line-1 .char',
+      translateY: [100, 0],
+      opacity: [0, 1],
+      rotateX: [45, 0],
+      delay: anime.stagger(40, { from: 'center', start: 200 }),
+    }, 0);
+
+    // 3. Main Title Line 2 (Alchimistra)
+    tl.add({
+      targets: '.hero-line-2 .char',
+      translateY: [150, 0],
+      opacity: [0, 1],
+      rotateX: [60, 0],
+      delay: anime.stagger(30, { from: 'center', start: 400 }),
+    }, 100);
+
+    // 4. Description Reveal
+    tl.add({
+      targets: '.hero-desc',
+      translateY: [20, 0],
+      opacity: [0, 1],
+      duration: 1000,
+      easing: 'easeOutQuart',
+    }, 800);
+
+    // 5. Strike Line
+    tl.add({
+      targets: '.hero-strike',
+      width: [0, 100],
+      opacity: [0, 1],
+      duration: 800,
+      easing: 'easeInOutQuad',
+    }, 1200);
+
+    // 6. Contact Button
+    tl.add({
+      targets: '.hero-cta',
+      translateY: [20, 0],
+      opacity: [0, 1],
+      duration: 800,
+    }, 1000);
+
+  }, []);
+
+  const splitText = (text: string) => {
+    return text.split("").map((char, index) => (
+      <span key={index} className="char inline-block" style={{ perspective: '1000px' }}>
+        {char === " " ? "\u00A0" : char}
+      </span>
+    ));
+  };
+
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-        className="z-10 flex flex-col items-center"
-      >
+      <div className="z-10 flex flex-col items-center">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -26,40 +90,27 @@ export function AlchemistHero() {
           </span>
         </motion.div>
 
-        <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.8]">
-          <span className="block text-[12vw] md:text-[10vw] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20">
-            Digital
+        <h1 ref={titleRef} className="font-sans font-black uppercase tracking-tighter leading-[0.8] overflow-hidden flex flex-col items-center">
+          <span className="hero-line-1 block text-[11vw] md:text-[9vw] text-white/40 pb-2 whitespace-nowrap">
+            {splitText("Digital")}
           </span>
-          <span className="block text-[15vw] md:text-[13vw] text-white">
-            Alchimistra
+          <span className="hero-line-2 block text-[13vw] md:text-[11vw] text-white whitespace-nowrap">
+            {splitText("Alchimistra")}
           </span>
         </h1>
         
-        <div className="mt-8 flex flex-col items-center gap-6">
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="max-w-xl text-zinc-400 text-lg md:text-xl font-medium tracking-[0.2em] uppercase"
-          >
-            Building high-performance <span className="text-cyan-400 italic">digital products</span> that scale your business.
-          </motion.p>
+        <div className="mt-8 flex flex-col items-center gap-6 text-center">
+          <div className="hero-desc opacity-0 flex flex-col items-center">
+            <p className="max-w-xl text-zinc-400 text-lg md:text-xl font-medium tracking-[0.2em] uppercase text-center">
+              Building high-performance <span className="text-cyan-400 italic">digital products</span> that scale your business.
+            </p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="max-w-2xl text-zinc-500 text-sm md:text-base font-sans leading-relaxed tracking-wide"
-          >
-            Alchimistra is a premium digital studio that turns complex business ideas into high-performance web and mobile solutions.
-          </motion.p>
+            <p className="max-w-2xl text-zinc-500 text-sm md:text-base font-sans mt-4 leading-relaxed tracking-wide text-center">
+              Alchimistra is a premium digital studio that turns complex business ideas into high-performance web and mobile solutions.
+            </p>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="mt-6"
-          >
+          <div className="hero-cta mt-6 opacity-0 flex justify-center">
             <a 
               href="https://wa.me/60183823063?text=Hello%20Irfan,%20I%20saw%20your%20portfolio..." 
               target="_blank"
@@ -68,16 +119,11 @@ export function AlchemistHero() {
             >
               START_PROJECT
             </a>
-          </motion.div>
+          </div>
           
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: "100px" }}
-            transition={{ delay: 1, duration: 1 }}
-            className="h-[1px] bg-cyan-500"
-          />
+          <div className="hero-strike h-[1px] bg-cyan-500 opacity-0 mx-auto" />
         </div>
-      </motion.div>
+      </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
@@ -103,3 +149,4 @@ export function AlchemistHero() {
     </section>
   );
 }
+
