@@ -10,40 +10,49 @@ export function AlchemistHero() {
   const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-[]{}|;:,.<>/?";
+    
+    // TRIGGER DECRYPTION FOR ALL CHARACTERS
+    const elements = document.querySelectorAll('.char');
+    elements.forEach((el, i) => {
+      const originalText = el.textContent || "";
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800,
+        delay: (el, idx) => {
+          // Since we are iterating manually, we need to match the index
+          // We'll just use the index of the element in the total list
+          return anime.random(0, 500) + 500; // Let's stick to true random for decryption chaos
+        },
+        easing: 'easeOutExpo',
+        update: function(anim) {
+          if (anim.progress < 100) {
+            if (Math.random() > 0.6) {
+              el.textContent = chars[Math.floor(Math.random() * chars.length)];
+            }
+          } else {
+            el.textContent = originalText;
+          }
+        }
+      });
+    });
+
     // ELITE TYPOGRAPHY REVEAL STRATORY
     const tl = anime.timeline({
       easing: 'easeOutExpo',
       duration: 1200,
     });
 
-    // 1. Badge Reveal (Framer handles this initially, but we can sync or leave)
-    
-    // 2. Main Title Line 1 (Digital)
-    tl.add({
-      targets: '.hero-line-1 .char',
-      translateY: [100, 0],
-      opacity: [0, 1],
-      rotateX: [45, 0],
-      delay: anime.stagger(40, { from: 'center', start: 200 }),
-    }, 0);
-
-    // 3. Main Title Line 2 (Alchimistra)
-    tl.add({
-      targets: '.hero-line-2 .char',
-      translateY: [150, 0],
-      opacity: [0, 1],
-      rotateX: [60, 0],
-      delay: anime.stagger(30, { from: 'center', start: 400 }),
-    }, 100);
-
-    // 4. Description Reveal
+    // 4. Description Reveal (Synced with Chaos end)
     tl.add({
       targets: '.hero-desc',
       translateY: [20, 0],
       opacity: [0, 1],
       duration: 1000,
       easing: 'easeOutQuart',
-    }, 800);
+    }, 1500);
 
     // 5. Strike Line
     tl.add({
@@ -52,7 +61,7 @@ export function AlchemistHero() {
       opacity: [0, 1],
       duration: 800,
       easing: 'easeInOutQuad',
-    }, 1200);
+    }, 1800);
 
     // 6. Contact Button
     tl.add({
@@ -60,7 +69,7 @@ export function AlchemistHero() {
       translateY: [20, 0],
       opacity: [0, 1],
       duration: 800,
-    }, 1000);
+    }, 1600);
 
   }, []);
 
