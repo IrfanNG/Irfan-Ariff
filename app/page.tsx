@@ -1,5 +1,6 @@
 import { AlchemistHero } from "@/src/ui/sections/AlchemistHero";
 import { AlchemistServices } from "@/src/ui/sections/AlchemistServices";
+import { AlchemistProcess } from "@/src/ui/sections/AlchemistProcess";
 import { AlchemistProjects } from "@/src/ui/sections/AlchemistProjects";
 import { AlchemistContact } from "@/src/ui/sections/AlchemistContact";
 import { VisitTracker } from "@/components/analytics/visit-tracker";
@@ -40,6 +41,8 @@ export default async function Home() {
         <AlchemistHero />
         
         <AlchemistServices services={services} />
+
+        <AlchemistProcess />
 
         <AlchemistProjects projects={projects} />
 

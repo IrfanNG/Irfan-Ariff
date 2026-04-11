@@ -39,7 +39,7 @@ export function AlchemistProjects({ projects }: { projects: ProjectData[] }) {
   const cardWidth = isMobile ? 85 : 50;
   const gap = 5;
   const centerOffset = (100 - cardWidth) / 2;
-  
+
   const segments = displayProjects.map((_, i) => {
     if (displayProjects.length <= 1) return 0.5;
     return 0.12 + (i * 0.76) / (displayProjects.length - 1);
@@ -52,11 +52,11 @@ export function AlchemistProjects({ projects }: { projects: ProjectData[] }) {
   const backgroundColor = useTransform(smoothProgress, [0, 0.2, 0.8, 1], ["#000000", "#01080b", "#01080b", "#000000"]);
 
   return (
-    <motion.section 
+    <motion.section
       id="projects"
-      ref={containerRef} 
+      ref={containerRef}
       style={{ backgroundColor }}
-      className="relative h-[600vh] w-full" 
+      className="relative h-[600vh] w-full"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
         {/* Spatial Title Overlay */}
@@ -75,30 +75,29 @@ export function AlchemistProjects({ projects }: { projects: ProjectData[] }) {
 
         {/* Exhibition Status (Top Right) */}
         <div className="absolute top-20 right-12 md:right-24 z-20 pointer-events-none text-right">
-          <motion.div 
+          <motion.div
             style={{ opacity: useTransform(smoothProgress, [0, 0.1], [1, 0]) }}
             className="space-y-1"
           >
-             <span className="font-mono text-[8px] text-zinc-500 uppercase tracking-widest block">System_Live</span>
-             <span className="font-mono text-[10px] text-cyan-500 uppercase block">ORCHESTRATING_S_RANK_PIXELS</span>
+            <span className="font-mono text-[8px] text-zinc-500 uppercase tracking-widest block">System_Live</span>
           </motion.div>
         </div>
         {/* Background Depth Grid */}
-        <div className="absolute inset-0 bg-blueprint-grid opacity-[0.03] pointer-events-none" 
-             style={{ perspective: '1500px', transform: 'rotateX(80deg) translateY(-20%) scale(3)' }} />
-        
+        <div className="absolute inset-0 bg-blueprint-grid opacity-[0.03] pointer-events-none"
+          style={{ perspective: '1500px', transform: 'rotateX(80deg) translateY(-20%) scale(3)' }} />
+
         {/* Ambient Glows */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[60vh] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         {/* HORIZONTAL PROJECT TRACK */}
         <motion.div style={{ x, gap: `${gap}vw` }} className="flex items-center">
           {displayProjects.map((project, index) => (
-            <ProjectGalleryCard 
-              key={project.id} 
-              project={project} 
-              index={index} 
+            <ProjectGalleryCard
+              key={project.id}
+              project={project}
+              index={index}
               targetProgress={segments[index]}
-              progress={smoothProgress} 
+              progress={smoothProgress}
               isMobile={isMobile}
             />
           ))}
@@ -106,34 +105,34 @@ export function AlchemistProjects({ projects }: { projects: ProjectData[] }) {
 
         {/* BOTTOM HUD */}
         <div className="absolute bottom-12 left-12 right-12 z-20 flex justify-between items-end border-t border-white/5 pt-8">
-           <div className="flex flex-col gap-1">
-              <span className="font-mono text-[8px] text-cyan-500/50 uppercase tracking-[0.5em]">System.Gallery_Focus</span>
-              <div className="flex items-baseline gap-4">
-                <span className="font-sans font-black text-4xl text-white italic">
-                  <HUDCounter progress={smoothProgress} total={displayProjects.length} />
-                </span>
-                <span className="font-mono text-[10px] text-zinc-600">/ 0{displayProjects.length}</span>
-              </div>
-           </div>
-           
-           <div className="flex flex-col items-end gap-4">
-              <div className="flex gap-2 items-end h-3">
-                 {displayProjects.map((_, i) => (
-                    <HUDIndicator 
-                      key={i} 
-                      index={i} 
-                      progress={smoothProgress} 
-                      target={segments[i]} 
-                    />
-                 ))}
-              </div>
-              <div className="w-48 h-[1px] bg-white/10 relative">
-                 <motion.div 
-                    className="absolute top-0 left-0 h-full bg-cyan-500" 
-                    style={{ width: useTransform(smoothProgress, [0, 1], ["0%", "100%"]) }}
-                 />
-              </div>
-           </div>
+          <div className="flex flex-col gap-1">
+            <span className="font-mono text-[8px] text-cyan-500/50 uppercase tracking-[0.5em]">System.Gallery_Focus</span>
+            <div className="flex items-baseline gap-4">
+              <span className="font-sans font-black text-4xl text-white italic">
+                <HUDCounter progress={smoothProgress} total={displayProjects.length} />
+              </span>
+              <span className="font-mono text-[10px] text-zinc-600">/ 0{displayProjects.length}</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-end gap-4">
+            <div className="flex gap-2 items-end h-3">
+              {displayProjects.map((_, i) => (
+                <HUDIndicator
+                  key={i}
+                  index={i}
+                  progress={smoothProgress}
+                  target={segments[i]}
+                />
+              ))}
+            </div>
+            <div className="w-48 h-[1px] bg-white/10 relative">
+              <motion.div
+                className="absolute top-0 left-0 h-full bg-cyan-500"
+                style={{ width: useTransform(smoothProgress, [0, 1], ["0%", "100%"]) }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </motion.section>
@@ -142,8 +141,8 @@ export function AlchemistProjects({ projects }: { projects: ProjectData[] }) {
 
 function HUDCounter({ progress, total }: { progress: any, total: number }) {
   const [displayCount, setDisplayCount] = useState(1);
-  
-  useMotionValueEvent(progress, "change", (latest) => {
+
+  useMotionValueEvent(progress, "change", (latest: number) => {
     const current = Math.min(total, Math.max(1, Math.round(latest * (total - 1)) + 1));
     if (current !== displayCount) setDisplayCount(current);
   });
@@ -154,8 +153,8 @@ function HUDCounter({ progress, total }: { progress: any, total: number }) {
 function HUDIndicator({ index, progress, target }: { index: number, progress: any, target: number }) {
   const height = useTransform(progress, [target - 0.15, target, target + 0.15], [4, 12, 4]);
   const backgroundColor = useTransform(
-    progress, 
-    [target - 0.15, target, target + 0.15], 
+    progress,
+    [target - 0.15, target, target + 0.15],
     ["rgba(255,255,255,0.1)", "#06b6d4", "rgba(255,255,255,0.1)"]
   );
 
@@ -171,10 +170,10 @@ function ProjectGalleryCard({ project, index, targetProgress, progress, isMobile
   const z = useTransform(progress, [start, targetProgress, end], [-400, 100, -400]);
   const scale = useTransform(progress, [start, targetProgress, end], [0.85, 1.05, 0.85]);
   const opacity = useTransform(progress, [start, targetProgress - 0.12, targetProgress, targetProgress + 0.12, end], [0, 1, 1, 1, 0]);
-  
+
   const filter = useTransform(
-    progress, 
-    [start, targetProgress, end], 
+    progress,
+    [start, targetProgress, end],
     [`blur(10px) grayscale(100%)`, `blur(0px) grayscale(0%)`, `blur(10px) grayscale(100%)`]
   );
 
@@ -182,8 +181,8 @@ function ProjectGalleryCard({ project, index, targetProgress, progress, isMobile
   const infoOpacity = useTransform(progress, [targetProgress - 0.08, targetProgress, targetProgress + 0.08], [0, 1, 0]);
 
   return (
-    <motion.div 
-      style={{ 
+    <motion.div
+      style={{
         rotateY,
         z,
         opacity,
@@ -199,8 +198,8 @@ function ProjectGalleryCard({ project, index, targetProgress, progress, isMobile
         <div className="absolute inset-0 overflow-hidden">
           <motion.div style={{ x: xImage, scale: 1.3 }} className="absolute inset-0">
             {project.image_primary && (
-              <Image 
-                src={project.image_primary} 
+              <Image
+                src={project.image_primary}
                 alt={project.title}
                 fill
                 className="object-cover"
@@ -208,7 +207,7 @@ function ProjectGalleryCard({ project, index, targetProgress, progress, isMobile
             )}
           </motion.div>
         </div>
-        
+
         {/* Desktop Overlay Gradient */}
         {!isMobile && <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10" />}
 
@@ -221,31 +220,31 @@ function ProjectGalleryCard({ project, index, targetProgress, progress, isMobile
         </div>
 
         {/* Scanning Laser Line */}
-        <motion.div 
+        <motion.div
           style={{ top: useTransform(progress, [start, end], ["0%", "100%"]) }}
-          className="absolute left-0 w-full h-[1px] bg-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.8)] z-30 pointer-events-none" 
+          className="absolute left-0 w-full h-[1px] bg-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.8)] z-30 pointer-events-none"
         />
       </div>
 
       {/* Content Info Section */}
-      <motion.div 
-        style={{ opacity: infoOpacity }} 
+      <motion.div
+        style={{ opacity: infoOpacity }}
         className={cn(
           "z-20",
-          isMobile 
-            ? "mt-6 space-y-4 px-2" 
+          isMobile
+            ? "mt-6 space-y-4 px-2"
             : "absolute bottom-12 left-12 right-12 space-y-6"
         )}
       >
         <div className="flex flex-col gap-1 md:gap-2">
           <span className="font-mono text-[8px] md:text-[9px] text-cyan-500 tracking-[0.4em] uppercase block">
-            MODULE_REF_0{index+1}
+            MODULE_REF_0{index + 1}
           </span>
           <h3 className="font-sans font-black text-3xl md:text-5xl lg:text-6xl uppercase tracking-tighter text-white leading-none">
             {project.title}
           </h3>
         </div>
-        
+
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-4">
           <p className={cn(
             "font-sans text-zinc-400 leading-relaxed",
@@ -253,9 +252,9 @@ function ProjectGalleryCard({ project, index, targetProgress, progress, isMobile
           )}>
             {project.description}
           </p>
-          
+
           {project.live_url && (
-            <a 
+            <a
               href={project.live_url}
               target="_blank"
               className="shrink-0 px-6 py-3 bg-white text-black font-sans font-black uppercase text-[10px] tracking-widest hover:bg-cyan-500 hover:text-white transition-all duration-300 w-full md:w-auto text-center"

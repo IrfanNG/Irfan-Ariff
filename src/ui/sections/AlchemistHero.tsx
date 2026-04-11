@@ -83,19 +83,12 @@ export function AlchemistHero() {
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
       <div className="hero-stage z-10 flex flex-col items-center" style={{ perspective: '2000px', transformStyle: 'preserve-3d' }}>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex items-center gap-3 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 mb-8"
-        >
+          transition={{ duration: 0.8, delay: 0.2 }}        >
           <div className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
           </div>
-          <span className="font-mono text-[9px] text-cyan-400 uppercase tracking-widest">
-            Operation: Alchemist Strike // Site_Initialization_Complete
-          </span>
         </motion.div>
 
         <h1 ref={titleRef} className="font-sans font-black uppercase tracking-tighter leading-[0.8] overflow-hidden flex flex-col items-center">
@@ -106,7 +99,7 @@ export function AlchemistHero() {
             {splitText("Alchimistra")}
           </span>
         </h1>
-        
+
         <div className="mt-8 flex flex-col items-center gap-6 text-center">
           <div className="hero-desc opacity-0 flex flex-col items-center">
             <p className="max-w-xl text-zinc-400 text-lg md:text-xl font-medium tracking-[0.2em] uppercase text-center">
@@ -117,10 +110,10 @@ export function AlchemistHero() {
               Alchimistra is a premium digital studio that turns complex business ideas into high-performance web and mobile solutions.
             </p>
           </div>
-          
+
           <div className="hero-cta mt-6 opacity-0 flex justify-center">
-            <a 
-              href="https://wa.me/60183823063?text=Hello%20Irfan,%20I%20saw%20your%20portfolio..." 
+            <a
+              href="https://wa.me/60183823063?text=Hello%20Irfan,%20I%20saw%20your%20portfolio..."
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-white text-black font-sans font-black uppercase text-xs tracking-[0.2em] hover:bg-cyan-500 hover:text-white hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all duration-300"
@@ -128,7 +121,7 @@ export function AlchemistHero() {
               START_PROJECT
             </a>
           </div>
-          
+
           <div className="hero-strike h-[1px] bg-cyan-500 opacity-0 mx-auto" />
         </div>
       </div>
@@ -138,7 +131,7 @@ export function AlchemistHero() {
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-[120px] animate-pulse delay-1000" />
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
@@ -148,7 +141,7 @@ export function AlchemistHero() {
         }}
       >
         <span className="font-mono text-[8px] tracking-[0.4em] text-zinc-500 uppercase">Scroll</span>
-        <motion.div 
+        <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           className="w-[1px] h-12 bg-gradient-to-b from-cyan-500 to-transparent"
