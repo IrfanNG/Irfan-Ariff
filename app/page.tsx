@@ -12,7 +12,6 @@ import {
   getSiteConfig
 } from "@/lib/supabase/queries";
 
-import { CommandPalette } from "@/components/command-palette";
 import { AlchemistLayout } from "@/src/ui/layout/AlchemistLayout";
 
 export const revalidate = 60;
@@ -34,7 +33,7 @@ export default async function Home() {
 
   return (
     <AlchemistLayout>
-      <div className="block w-full max-w-[100vw] relative">
+      <div className="block w-full max-w-[100vw] relative bg-black">
         <VisitTracker />
         
         {/* OPERATION ALCHEMIST: THE COMPLETE STRIKE */}
@@ -47,8 +46,6 @@ export default async function Home() {
         <AlchemistProjects projects={projects} />
 
         <AlchemistContact profile={profile} />
-
-        <CommandPalette />
       </div>
     </AlchemistLayout>
   );

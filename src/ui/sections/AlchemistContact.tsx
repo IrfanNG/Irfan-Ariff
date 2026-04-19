@@ -1,13 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ProfileData } from "@/lib/types";
-import { ArrowRight } from "lucide-react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendEmail } from "@/lib/actions/send-email";
 
-// Define the shape of the state
 type ContactFormState = {
     success: boolean;
     message?: string;
@@ -29,89 +26,75 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
 
   return (
     <>
-      <section id="contact" className="w-full py-40 px-6 md:px-12 lg:px-24 relative z-10 bg-black overflow-hidden">
-        {/* Animated Terminal Scanlines Overlay */}
-        <div className="absolute inset-0 bg-scanlines opacity-70 pointer-events-none" />
-        
-        <div className="flex flex-col gap-24 relative z-10">
-        <h2 className="font-sans font-black text-6xl md:text-[12vw] uppercase tracking-tighter text-white leading-[0.8]">
-          Let&apos;s <span className="text-transparent" style={{ WebkitTextStroke: "1px white" }}>Transmute</span> <br />
-          The Future.
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          <div className="space-y-12">
-            <p className="font-sans text-2xl text-zinc-400 max-w-md leading-tight">
-              Alchimistra is currently accepting elite collaborations. Ready to architect your next mutation?
-            </p>
-            <div className="flex flex-col gap-4">
-              <span className="font-mono text-[10px] tracking-[0.4em] text-cyan-500 uppercase">Neural_Link</span>
-              <a href={`mailto:${profile?.email}`} className="font-sans font-black text-2xl md:text-4xl text-white hover:text-cyan-500 transition-colors break-all">
-                {profile?.email}
-              </a>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-12 p-8 md:p-12 bg-white/[0.02] border border-white/5 backdrop-blur-3xl">
-            <form action={formAction} className="space-y-8">
-              <div className="space-y-2">
-                <label htmlFor="name" className="font-mono text-10px text-zinc-400 uppercase tracking-widest">Identify_Self</label>
-                <input id="name" name="name" required type="text" placeholder="NAME / ORGANIZATION" className="w-full bg-transparent border-b border-white/10 py-4 font-sans font-bold text-white outline-none focus:border-cyan-500 transition-all placeholder:text-zinc-700" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="font-mono text-10px text-zinc-400 uppercase tracking-widest">Comm_Protocol</label>
-                <input id="email" name="email" required type="email" placeholder="EMAIL_ADDRESS" className="w-full bg-transparent border-b border-white/10 py-4 font-sans font-bold text-white outline-none focus:border-cyan-500 transition-all placeholder:text-zinc-700" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="font-mono text-10px text-zinc-400 uppercase tracking-widest">Mission_Brief</label>
-                <textarea id="message" name="message" required rows={4} placeholder="DESCRIBE YOUR VISION" className="w-full bg-transparent border-b border-white/10 py-4 font-sans font-bold text-white outline-none focus:border-cyan-500 transition-all resize-none placeholder:text-zinc-700" />
-              </div>
-              
-              <SubmitButton />
-
-              {state?.success && (
-                  <p className="text-cyan-500 text-xs font-mono mt-2 animate-pulse">
-                      &gt; {state.message}
-                  </p>
-              )}
-              {state?.error && (
-                  <p className="text-red-500 text-xs font-mono mt-2">
-                      &gt; ERROR: {state.error}
-                  </p>
-              )}
-            </form>
-          </div>
+      <section id="contact" className="py-32 px-6 md:px-12 bg-[#0e0e0e]">
+        <div className="max-w-[800px] mx-auto text-center mb-16">
+          <h2 className="font-sans text-[3.5rem] leading-[1.1] tracking-[-0.04em] text-white mb-6 animate-reveal">Let&apos;s Talk.</h2>
+          <p className="font-sans text-[0.875rem] text-[#C6C6C6] font-light">Initiate a dialogue. Detail your requirements below.</p>
         </div>
-      </div>
+        
+        <div className="max-w-[600px] mx-auto bg-[#1c1b1b] p-8 md:p-12 border border-[#474747]/30">
+          <form action={formAction} className="space-y-12">
+            <div className="relative group">
+              <input 
+                name="name" 
+                required 
+                type="text" 
+                placeholder=" " 
+                className="peer w-full bg-transparent border-0 border-b border-[#474747] px-0 py-3 text-white font-sans text-[0.875rem] focus:ring-0 focus:border-white transition-colors"
+              />
+              <label className="absolute left-0 top-3 text-[#C6C6C6] font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-white peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                Name
+              </label>
+            </div>
+
+            <div className="relative group">
+              <input 
+                name="email" 
+                required 
+                type="email" 
+                placeholder=" " 
+                className="peer w-full bg-transparent border-0 border-b border-[#474747] px-0 py-3 text-white font-sans text-[0.875rem] focus:ring-0 focus:border-white transition-colors"
+              />
+              <label className="absolute left-0 top-3 text-[#C6C6C6] font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-white peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                Email Address
+              </label>
+            </div>
+
+            <div className="relative group">
+              <textarea 
+                name="message" 
+                required 
+                rows={4} 
+                placeholder=" " 
+                className="peer w-full bg-transparent border-0 border-b border-[#474747] px-0 py-3 text-white font-sans text-[0.875rem] focus:ring-0 focus:border-white transition-colors resize-none"
+              />
+              <label className="absolute left-0 top-3 text-[#C6C6C6] font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-white peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                Project Details
+              </label>
+            </div>
+
+            <div className="pt-4 flex justify-end">
+              <SubmitButton />
+            </div>
+
+            {state?.success && <p className="text-white text-[10px] font-mono mt-4 uppercase">Transmitted.</p>}
+          </form>
+        </div>
       </section>
       
-      <footer className="relative w-full py-12 px-6 md:px-12 lg:px-24 overflow-hidden border-t border-white/10">
-        {/* Ambient Glowing Orbs (Hero Vibe) */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-0">
-          <div className="absolute top-0 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-blue-500/10 rounded-full blur-[120px] animate-pulse delay-1000" />
+      <footer className="bg-[#0E0E0E] flex flex-col md:flex-row justify-between items-center w-full px-12 py-16 border-t border-[#474747]/20 mt-auto">
+        <div className="text-lg font-bold text-white mb-6 md:mb-0 tracking-tighter uppercase">
+          ALCHIMISTRA
+        </div>
+        
+        <div className="flex space-x-8 mb-6 md:mb-0">
+          <a href="#" className="font-sans text-[10px] tracking-[0.1em] uppercase font-light text-[#C6C6C6] hover:text-white transition-colors">INSTAGRAM</a>
+          <a href="https://github.com/irfanng" target="_blank" className="font-sans text-[10px] tracking-[0.1em] uppercase font-light text-[#C6C6C6] hover:text-white transition-colors">GITHUB</a>
+          <a href="#" className="font-sans text-[10px] tracking-[0.1em] uppercase font-light text-[#C6C6C6] hover:text-white transition-colors">LINKEDIN</a>
         </div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
-             <span className="font-mono text-[10px] tracking-[0.3em] text-zinc-300">
-               ALCHIMISTRA // ORCHESTRATING THE DIGITAL ETHER
-             </span>
-             <span className="hidden md:inline font-mono text-zinc-600">|</span>
-             <span className="font-mono text-[10px] tracking-[0.3em] text-cyan-400 flex items-center gap-2">
-               <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-               AVAILABLE FOR MISSIONS
-             </span>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <span className="font-mono text-[10px] tracking-[0.3em] text-zinc-400">LOC: KUALA LUMPUR, MY</span>
-            <span className="hidden md:inline font-mono text-zinc-600">|</span>
-            <div className="flex items-center gap-6">
-              <a href="https://github.com/irfanng" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] tracking-[0.3em] text-zinc-300 hover:text-cyan-400 transition-colors">GITHUB</a>
-              <a href="https://www.linkedin.com/in/irfan-ariff-20691a264" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] tracking-[0.3em] text-zinc-300 hover:text-cyan-400 transition-colors">LINKEDIN</a>
-            </div>
-          </div>
+        <div className="font-sans text-[10px] tracking-[0.1em] uppercase font-light text-[#C6C6C6]">
+          © 2026 ALCHIMISTRA. ALL RIGHTS RESERVED.
         </div>
       </footer>
     </>
@@ -125,24 +108,10 @@ function SubmitButton() {
     <button 
       disabled={pending}
       type="submit"
-      className="w-full mt-4 py-4 md:py-5 bg-cyan-500 text-black font-sans font-black uppercase text-[10px] md:text-sm tracking-[0.1em] md:tracking-[0.3em] flex items-center justify-center gap-2 md:gap-4 hover:bg-white hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] transition-all duration-500 group disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+      className="bg-white text-black font-sans font-bold text-[11px] tracking-[0.1em] uppercase px-8 py-4 hover:bg-[#ababab] transition-colors flex items-center space-x-3 disabled:opacity-50"
     >
-      {pending ? (
-        <>
-          TRANSMITTING...
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-            className="w-4 h-4 border-2 border-black border-t-transparent rounded-full"
-          />
-        </>
-      ) : (
-        <>
-          INITIATE_TRANSMUTATION
-          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-        </>
-      )}
+      <span>{pending ? "SENDING..." : "SUBMIT INQUIRY"}</span>
+      <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'wght' 400" }}>arrow_forward</span>
     </button>
   );
 }
-

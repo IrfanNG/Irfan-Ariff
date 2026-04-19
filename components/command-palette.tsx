@@ -2,7 +2,6 @@
 
 import { Command, Check, FileText, Mail, MessageSquare, Github, Linkedin, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { trackClick } from "@/lib/actions/analytics";
 import { copyToClipboard } from "@/lib/utils";
 
@@ -83,104 +82,72 @@ export function CommandPalette() {
         }
     ];
 
-    return (
-        <>
-            <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1 }}
-                onClick={() => setOpen(!open)}
-                className="fixed bottom-10 right-10 z-50 flex items-center justify-center w-12 h-12 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl hover:border-cyan-500/50 hover:bg-white/10 transition-all cursor-pointer group"
+    if (!open) {
+        return (
+            <button
+                onClick={() => setOpen(true)}
+                className="fixed bottom-8 right-8 z-50 flex items-center justify-center w-12 h-12 bg-black border border-white/20 hover:border-white transition-all group"
             >
-                <Command className="w-4 h-4 text-zinc-400 group-hover:text-cyan-400 transition-colors" />
-                
-                {/* Tooltip */}
-                <span className="absolute right-14 px-3 py-1 bg-zinc-900 border border-white/5 rounded text-[10px] font-mono text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none uppercase tracking-widest">
-                    Open_Terminal (⌘K)
+                <Command className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
+                <span className="absolute right-14 px-2 py-1 bg-black border border-white/10 text-[10px] font-mono text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">
+                    (⌘K)
                 </span>
-            </motion.div>
+            </button>
+        );
+    }
 
-            <AnimatePresence>
-                {open && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-                        onClick={() => setOpen(false)}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                            className="w-full max-w-lg bg-[#050505] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <div className="flex items-center border-b border-white/5 px-4 bg-white/[0.02]">
-                                <Command className="mr-3 h-4 w-4 shrink-0 text-cyan-500" />
-                                <input
-                                    className="flex h-14 w-full rounded-md bg-transparent py-4 font-mono text-[11px] uppercase tracking-widest outline-none placeholder:text-zinc-700 text-white"
-                                    placeholder="Execute_Command..."
-                                    autoFocus
-                                />
-                                <kbd className="hidden sm:inline-flex h-6 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-2 font-mono text-[10px] font-medium text-zinc-500">
-                                    ESC
-                                </kbd>
-                            </div>
-                            
-                            <div className="p-2 max-h-[400px] overflow-y-auto custom-scrollbar">
-                                <div className="px-3 py-2 text-[10px] font-mono text-zinc-600 uppercase tracking-[0.3em]">Operational_Uplinks</div>
-                                
-                                <div className="space-y-1">
-                                    {commands.map((cmd) => (
-                                        <div
-                                            key={cmd.id}
-                                            onClick={cmd.action}
-                                            className="group flex cursor-pointer items-center px-3 py-3 hover:bg-white/5 transition-all duration-200"
-                                        >
-                                            <div className="mr-4 flex h-8 w-8 items-center justify-center bg-white/[0.03] border border-white/5 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10 transition-all">
-                                                <cmd.icon className="h-4 w-4 text-zinc-500 group-hover:text-cyan-400 transition-colors" />
-                                            </div>
-                                            
-                                            <div className="flex flex-col">
-                                                <span className="font-sans font-bold text-sm text-zinc-300 group-hover:text-white transition-colors uppercase tracking-tight">
-                                                    {cmd.id === 'email' && copied ? "TRANSFERRED_TO_CLIPBOARD" : cmd.label}
-                                                </span>
-                                                <span className="font-mono text-[9px] text-zinc-600 group-hover:text-zinc-400 transition-colors uppercase tracking-widest">
-                                                    {cmd.value}
-                                                </span>
-                                            </div>
-
-                                            <div className="ml-auto">
-                                                {cmd.id === 'email' && copied ? (
-                                                    <Check className="h-4 w-4 text-cyan-500" />
-                                                ) : (
-                                                    <ExternalLink className="h-3 w-3 text-zinc-700 opacity-0 group-hover:opacity-100 transition-all" />
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
+    return (
+        <div
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/90"
+            onClick={() => setOpen(false)}
+        >
+            <div
+                className="w-full max-w-lg bg-black border border-white/20 overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <div className="flex items-center border-b border-white/10 px-4">
+                    <Command className="mr-3 h-4 w-4 shrink-0 text-white" />
+                    <input
+                        className="flex h-14 w-full bg-transparent py-4 font-mono text-xs uppercase tracking-widest outline-none placeholder:text-gray-800 text-white"
+                        placeholder="Search..."
+                        autoFocus
+                    />
+                    <button onClick={() => setOpen(false)} className="text-gray-500 hover:text-white text-[10px] font-mono uppercase tracking-widest">ESC</button>
+                </div>
+                
+                <div className="p-2 max-h-[400px] overflow-y-auto">
+                    <div className="px-3 py-2 text-[10px] font-mono text-gray-600 uppercase tracking-widest">Operational_Uplinks</div>
+                    
+                    <div className="space-y-px">
+                        {commands.map((cmd) => (
+                            <button
+                                key={cmd.id}
+                                onClick={cmd.action}
+                                className="w-full flex items-center px-4 py-3 hover:bg-white/5 transition-colors text-left"
+                            >
+                                <cmd.icon className="mr-4 h-4 w-4 text-gray-500" />
+                                <div className="flex flex-col">
+                                    <span className="font-sans font-bold text-sm text-gray-300 uppercase tracking-tight">
+                                        {cmd.id === 'email' && copied ? "TRANSFERRED_TO_CLIPBOARD" : cmd.label}
+                                    </span>
+                                    <span className="font-mono text-[9px] text-gray-600 uppercase">
+                                        {cmd.value}
+                                    </span>
                                 </div>
-                            </div>
+                                {cmd.id === 'email' && copied ? (
+                                    <Check className="ml-auto h-4 w-4 text-white" />
+                                ) : (
+                                    <ExternalLink className="ml-auto h-3 w-3 text-gray-800" />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
 
-                            <div className="border-t border-white/5 bg-white/[0.01] px-4 py-3 flex justify-between items-center">
-                                <div className="flex gap-4">
-                                    <div className="flex items-center gap-1.5">
-                                        <kbd className="h-4 w-4 flex items-center justify-center rounded bg-zinc-900 border border-white/10 text-[8px] text-zinc-500">↑</kbd>
-                                        <kbd className="h-4 w-4 flex items-center justify-center rounded bg-zinc-900 border border-white/10 text-[8px] text-zinc-500">↓</kbd>
-                                        <span className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest">Navigate</span>
-                                    </div>
-                                    <div className="flex items-center gap-1.5">
-                                        <kbd className="h-4 px-1 flex items-center justify-center rounded bg-zinc-900 border border-white/10 text-[8px] text-zinc-500">ENTER</kbd>
-                                        <span className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest">Execute</span>
-                                    </div>
-                                </div>
-                                <span className="text-[8px] font-mono text-cyan-500/50 uppercase tracking-[0.2em]">Alchimistra_V3.1_Core</span>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+                <div className="border-t border-white/10 bg-white/[0.02] px-4 py-3 flex justify-between items-center">
+                    <span className="text-[8px] font-mono text-gray-600 uppercase tracking-widest">ALCHIMISTRA_CORE</span>
+                </div>
+            </div>
+        </div>
     );
 }
