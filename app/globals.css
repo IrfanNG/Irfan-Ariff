@@ -15,21 +15,21 @@
   --color-surface-container: #f4f4f5;
   --color-on-surface-variant: #71717a;
   
-  /* Corporate Accent - Amethyst Purple */
-  --color-primary: #8B5CF6;
+  /* Corporate Accent - Dark Blue */
+  --color-primary: #1e3a8a;
   --color-primary-foreground: #ffffff;
 }
 
 :root {
   --radius: 0px;
-  --primary: 262 90% 66%;
+  --primary: 226 71% 33%;
   --primary-foreground: 0 0% 100%;
 }
 
 .light {
   --background: #ffffff;
   --foreground: #09090b;
-  --primary: 262 90% 66%;
+  --primary: 226 71% 33%;
   --primary-foreground: 0 0% 100%;
 }
 

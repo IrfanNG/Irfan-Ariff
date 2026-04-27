@@ -150,7 +150,8 @@ function SubmitButton() {
     <button 
       disabled={pending}
       type="submit"
-      className="bg-primary text-white font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-10 py-5 hover:bg-primary/90 transition-all flex items-center space-x-3 disabled:opacity-50"
+      style={{ backgroundColor: '#1e3a8a' }}
+      className="text-white font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-10 py-5 hover:opacity-90 transition-all flex items-center space-x-3 disabled:opacity-50 cursor-pointer"
     >
       <span>{pending ? "SENDING..." : "SUBMIT INQUIRY"}</span>
       <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'wght' 400" }}>arrow_forward</span>
