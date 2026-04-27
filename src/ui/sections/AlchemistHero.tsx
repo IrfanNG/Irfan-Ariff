@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HeroCanvas } from "../components/canvas/HeroCanvas";
 
 export function AlchemistHero() {
   const scrollTo = (id: string) => {
@@ -50,9 +49,21 @@ export function AlchemistHero() {
           </div>
         </div>
 
-        <div className="relative aspect-square md:aspect-[4/3] bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden group shadow-2xl shadow-zinc-200/50">
-           <HeroCanvas />
-           <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
+        <div className="relative aspect-square md:aspect-[4/3] bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden group shadow-2xl shadow-zinc-200/50 rounded-2xl">
+           <video 
+             autoPlay 
+             loop 
+             muted 
+             playsInline 
+             className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
+           >
+             <source src="/Video Project 1.mp4" type="video/mp4" />
+             Your browser does not support the video tag.
+           </video>
+           
+           {/* Glassmorphism Overlay */}
+           <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a8a]/20 to-transparent pointer-events-none" />
+           <div className="absolute inset-0 border border-white/5 rounded-2xl pointer-events-none" />
         </div>
       </motion.div>
     </section>
