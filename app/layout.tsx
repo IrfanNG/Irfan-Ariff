@@ -35,7 +35,7 @@ export default async function RootLayout({
         <main className="relative flex flex-col w-full min-h-screen">
           {children}
         </main>
-        <Toaster theme="light" position="bottom-right" />
+        <Toaster theme="light" position="top-center" />
       </body>
     </html>
   );

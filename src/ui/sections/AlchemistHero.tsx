@@ -4,17 +4,23 @@ import { motion } from "framer-motion";
 import { HeroCanvas } from "../components/canvas/HeroCanvas";
 
 export function AlchemistHero() {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section id="hero" className="pt-32 pb-20 px-6 md:px-12 max-w-[1440px] mx-auto relative overflow-hidden bg-zinc-50">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+    <section id="hero" className="pt-40 pb-20 px-6 md:px-12 max-w-[1440px] mx-auto relative overflow-hidden bg-zinc-50">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start w-full"
+        className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full"
       >
         <div className="space-y-8">
-          <p 
-            style={{ color: '#8B5CF6' }}
+          <p
+            style={{ color: '#1e3a8a' }}
             className="font-sans text-[11px] tracking-[0.2em] uppercase font-bold"
           >
             Digital Solutions for Modern Businesses
@@ -25,11 +31,12 @@ export function AlchemistHero() {
           <h2 className="font-sans text-2xl text-zinc-500 font-light leading-relaxed">
             Copper Boston Group helps you automate your work and save operational costs with smart technology solutions.
           </h2>
-          
+
           <div className="pt-4">
-            <button 
-              style={{ backgroundColor: '#8B5CF6' }}
-              className="text-white px-10 py-5 font-bold uppercase tracking-widest text-[13px] hover:opacity-90 transition-all duration-300"
+            <button
+              onClick={() => scrollTo("contact")}
+              style={{ backgroundColor: '#1e3a8a' }}
+              className="text-white px-10 py-5 font-bold uppercase tracking-widest text-[13px] hover:opacity-90 transition-all duration-300 cursor-pointer"
             >
               Get a Free Quote
             </button>
@@ -42,22 +49,10 @@ export function AlchemistHero() {
             </p>
           </div>
         </div>
-        
-        <div className="relative aspect-square md:aspect-[4/3] bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden group shadow-2xl shadow-zinc-200/50 rounded-2xl md:mt-12">
-           <video 
-             autoPlay 
-             loop 
-             muted 
-             playsInline 
-             className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
-           >
-             <source src="/Video Project 1.mp4" type="video/mp4" />
-             Your browser does not support the video tag.
-           </video>
-           
-           {/* Glassmorphism Overlay */}
-           <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent pointer-events-none" />
-           <div className="absolute inset-0 border border-white/5 rounded-2xl pointer-events-none" />
+
+        <div className="relative aspect-square md:aspect-[4/3] bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden group shadow-2xl shadow-zinc-200/50">
+           <HeroCanvas />
+           <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
         </div>
       </motion.div>
     </section>

@@ -66,7 +66,7 @@ export function AlchemistAbout() {
             <div className="w-12 h-1 bg-zinc-900" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {[
               {
                 id: "irfan",
@@ -110,6 +110,17 @@ export function AlchemistAbout() {
                   portfolio: "#", 
                   github: "https://github.com/pakyad", 
                   linkedin: "https://www.linkedin.com/in/iyad-iman-155a37237?utm_source=share_via&utm_content=profile&utm_medium=member_ios" 
+                }
+              },
+              {
+                id: "min",
+                name: "Abdul Muhaimin Bin Muhaimizu",
+                role: "Founder + CMO",
+                image: "/min.jpeg",
+                links: { 
+                  portfolio: "https://portfolio-web-drab-eta.vercel.app/", 
+                  github: "https://github.com/Mynnzu", 
+                  linkedin: "https://www.linkedin.com/in/abdul-muhaiminn-253b893b4" 
                 }
               }
             ].map((member, index) => (

@@ -1,10 +1,11 @@
 "use client";
 
 import { ProfileData } from "@/lib/types";
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendEmail } from "@/lib/actions/send-email";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, X } from "lucide-react";
 
 type ContactFormState = {
     success: boolean;
@@ -51,30 +52,60 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
               
               <div className="bg-zinc-50 p-10 border border-zinc-100 shadow-2xl shadow-zinc-100/50">
                 <form action={formAction} className="space-y-10">
-                  <div className="relative group">
-                    <input 
-                      name="name" 
-                      required 
-                      type="text" 
-                      placeholder=" " 
-                      className="peer w-full bg-transparent border-0 border-b border-zinc-200 px-0 py-3 text-zinc-900 font-sans text-sm focus:ring-0 focus:border-primary transition-colors"
-                    />
-                    <label className="absolute left-0 top-3 text-zinc-400 font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-primary peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
-                      Your Name
-                    </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="relative group">
+                      <input 
+                        name="name" 
+                        required 
+                        type="text" 
+                        placeholder=" " 
+                        className="peer w-full bg-transparent border-0 border-b border-zinc-200 px-0 py-3 text-zinc-900 font-sans text-sm focus:ring-0 focus:border-primary transition-colors"
+                      />
+                      <label className="absolute left-0 top-3 text-zinc-400 font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-primary peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                        Your Name
+                      </label>
+                    </div>
+
+                    <div className="relative group">
+                      <input 
+                        name="email" 
+                        required 
+                        type="email" 
+                        placeholder=" " 
+                        className="peer w-full bg-transparent border-0 border-b border-zinc-200 px-0 py-3 text-zinc-900 font-sans text-sm focus:ring-0 focus:border-primary transition-colors"
+                      />
+                      <label className="absolute left-0 top-3 text-zinc-400 font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-primary peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                        Your Email
+                      </label>
+                    </div>
                   </div>
 
-                  <div className="relative group">
-                    <input 
-                      name="email" 
-                      required 
-                      type="email" 
-                      placeholder=" " 
-                      className="peer w-full bg-transparent border-0 border-b border-zinc-200 px-0 py-3 text-zinc-900 font-sans text-sm focus:ring-0 focus:border-primary transition-colors"
-                    />
-                    <label className="absolute left-0 top-3 text-zinc-400 font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-primary peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
-                      Your Email
-                    </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="relative group">
+                      <input 
+                        name="phone" 
+                        required 
+                        type="tel" 
+                        placeholder=" " 
+                        className="peer w-full bg-transparent border-0 border-b border-zinc-200 px-0 py-3 text-zinc-900 font-sans text-sm focus:ring-0 focus:border-primary transition-colors"
+                      />
+                      <label className="absolute left-0 top-3 text-zinc-400 font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-primary peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                        Phone Number
+                      </label>
+                    </div>
+
+                    <div className="relative group">
+                      <input 
+                        name="subject" 
+                        required 
+                        type="text" 
+                        placeholder=" " 
+                        className="peer w-full bg-transparent border-0 border-b border-zinc-200 px-0 py-3 text-zinc-900 font-sans text-sm focus:ring-0 focus:border-primary transition-colors"
+                      />
+                      <label className="absolute left-0 top-3 text-zinc-400 font-sans text-[11px] tracking-[0.1em] uppercase transition-all peer-focus:-top-4 peer-focus:text-[9px] peer-focus:text-primary peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[9px]">
+                        Subject
+                      </label>
+                    </div>
                   </div>
 
                   <div className="relative group">
@@ -94,7 +125,11 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
                     <SubmitButton />
                   </div>
 
-                  {state?.success && <p className="text-primary text-[10px] font-sans mt-4 uppercase font-bold">Message Sent Successfully.</p>}
+                  {state?.success && (
+                    <p className="text-primary text-[10px] font-sans mt-4 uppercase font-bold animate-reveal">
+                      Submission Successful. Your inquiry has been transmitted to our team.
+                    </p>
+                  )}
                 </form>
               </div>
             </div>
@@ -150,7 +185,8 @@ function SubmitButton() {
     <button 
       disabled={pending}
       type="submit"
-      className="bg-primary text-white font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-10 py-5 hover:bg-primary/90 transition-all flex items-center space-x-3 disabled:opacity-50"
+      style={{ backgroundColor: '#1e3a8a' }}
+      className="text-white font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-10 py-5 hover:opacity-90 transition-all flex items-center space-x-3 disabled:opacity-50 cursor-pointer"
     >
       <span>{pending ? "SENDING..." : "SUBMIT INQUIRY"}</span>
       <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'wght' 400" }}>arrow_forward</span>
