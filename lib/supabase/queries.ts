@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { ProjectData, ExperienceData, TechStackData, ProfileData, ServiceData, SiteConfigData, AnalyticsData, EducationData, CertificateData } from '@/lib/types';
+import { ProjectData, ExperienceData, TechStackData, ProfileData, ServiceData, SiteConfigData, AnalyticsData, EducationData, CertificateData, ContactSubmission } from '@/lib/types';
 import { SupabaseClient } from '@supabase/supabase-js';
 
 export async function getAnalytics(supabase?: SupabaseClient): Promise<AnalyticsData[]> {
@@ -141,4 +141,24 @@ export async function getCertificates(supabase?: SupabaseClient): Promise<Certif
     }
 
     return data as CertificateData[];
+}
+
+export async function submitContactForm(formData: ContactSubmission, supabase?: SupabaseClient) {
+    const client = supabase || await createClient();
+    const { data, error } = await client
+        .from('contact_submissions')
+        .insert([
+            {
+                ...formData,
+                status: 'pending'
+            }
+        ])
+        .select();
+
+    if (error) {
+        console.error('Error submitting contact form:', error);
+        throw error;
+    }
+
+    return data;
 }

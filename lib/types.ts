@@ -82,3 +82,14 @@ export interface CertificateData {
     icon_tag: string;
     display_order: number;
 }
+
+export interface ContactSubmission {
+    id?: string;
+    name: string;
+    email: string;
+    phone: string;
+    subject: string;
+    message: string;
+    status: 'pending' | 'reviewed' | 'responded';
+    created_at?: string;
+}

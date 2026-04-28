@@ -1,7 +1,7 @@
 "use client";
 
 import { ProfileData } from "@/lib/types";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useState, useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { sendEmail } from "@/lib/actions/send-email";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,6 +25,13 @@ interface AlchemistContactProps {
 
 export function AlchemistContact({ profile }: AlchemistContactProps) {
   const [state, formAction] = useActionState(sendEmail, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state?.success) {
+      formRef.current?.reset();
+    }
+  }, [state]);
 
   return (
     <>
@@ -51,7 +58,7 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
               </p>
               
               <div className="bg-zinc-50 p-10 border border-zinc-100 shadow-2xl shadow-zinc-100/50">
-                <form action={formAction} className="space-y-10">
+                <form ref={formRef} action={formAction} className="space-y-10">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="relative group">
                       <input 
@@ -130,6 +137,12 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
                       Submission Successful. Your inquiry has been transmitted to our team.
                     </p>
                   )}
+
+                  {state?.error && (
+                    <p className="text-red-500 text-[10px] font-sans mt-4 uppercase font-bold animate-reveal">
+                      {state.error}
+                    </p>
+                  )}
                 </form>
               </div>
             </div>
@@ -142,14 +155,12 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
                 <div>
                   <h3 className="font-sans text-2xl font-black text-zinc-900 mb-3 tracking-tighter uppercase">Our Address</h3>
                   <p className="font-sans text-base text-zinc-500 font-light leading-relaxed">
-                    Unit 9-22 & 9-23, Level 9, Tower 1,<br/>
-                    Wangsa 118, No. 8, Jalan Wangsa Delima,<br/>
-                    Wangsa Maju, 53300 Kuala Lumpur.
+                    Setapak, 53300 Kuala Lumpur.
                   </p>
                 </div>
               </div>
 
-              <div className="flex gap-8 items-start">
+              {/* <div className="flex gap-8 items-start">
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-primary text-[28px]" style={{ fontVariationSettings: "'wght' 300" }}>mail</span>
                 </div>
@@ -159,7 +170,7 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
                     info@copperboston.com
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </motion.div>
