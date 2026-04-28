@@ -37,8 +37,8 @@ export function System() {
               <div className="w-8 h-[1px] bg-blue-800" />
               <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Architecture Spec</span>
             </div>
-            <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-              BEYOND THE <br/> <span className="text-zinc-300">INTERFACE.</span>
+            <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">
+              BEYOND THE <br/> <span className="text-zinc-200">INTERFACE.</span>
             </h2>
             <p className="font-sans text-lg text-zinc-500 font-light leading-relaxed max-w-xl">
               We don't just build websites; we architect the operational engines behind them. From custom CRMs to automated workflows, we provide full control over your digital infrastructure.

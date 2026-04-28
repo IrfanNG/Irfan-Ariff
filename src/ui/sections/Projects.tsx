@@ -46,7 +46,7 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
             <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Strategic Deployments</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            SELECTED <br/> <span className="text-zinc-300">PROJECTS.</span>
+            SELECTED <br/> <span className="text-zinc-200">PROJECTS.</span>
           </h2>
         </div>
 

@@ -25,8 +25,8 @@ export function Comparison() {
               <div className="w-8 h-[1px] bg-blue-800" />
               <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Strategic Audit</span>
             </div>
-            <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-              REVENUE <br/> <span className="text-zinc-300">INTEGRITY.</span>
+            <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">
+              REVENUE <br/> <span className="text-zinc-200">INTEGRITY.</span>
             </h2>
             <p className="font-sans text-lg text-zinc-500 font-light leading-relaxed max-w-xl">
               Platform dependency is a silent tax on your growth. We engineer independent digital assets that eliminate commission leakage and restore absolute control over your business intelligence.

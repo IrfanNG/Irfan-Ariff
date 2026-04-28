@@ -64,7 +64,7 @@ export function Pricing() {
             <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Investment Brief</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            STRATEGIC <br/> <span className="text-zinc-300">INVESTMENT.</span>
+            STRATEGIC <br/> <span className="text-zinc-200">INVESTMENT.</span>
           </h2>
         </div>
 

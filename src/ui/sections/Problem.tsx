@@ -40,7 +40,7 @@ export function Problem() {
             <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Friction Audit</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            THE GROWTH <br/> <span className="text-zinc-300">BARRIER.</span>
+            THE GROWTH <br/> <span className="text-zinc-200">BARRIER.</span>
           </h2>
         </div>
 

@@ -39,11 +39,14 @@ export function Process() {
         transition={{ duration: 0.8 }}
         className="max-w-[1440px] mx-auto"
       >
-        <div className="mb-24 text-center max-w-3xl mx-auto">
-          <h2 className="font-sans text-4xl md:text-5xl font-black text-zinc-900 tracking-tighter mb-6 uppercase">The Execution Protocol</h2>
-          <p className="font-sans text-base text-zinc-500 font-light leading-relaxed">
-            Our 4-phase deployment protocol ensures you get institutional-grade results at startup speed. No fluff, just results.
-          </p>
+        <div className="mb-24 text-left">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-8 h-[1px] bg-blue-800" />
+            <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Execution Protocol</span>
+          </div>
+          <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
+            STRATEGIC <br/> <span className="text-zinc-200">PATH.</span>
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">

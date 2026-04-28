@@ -44,11 +44,13 @@ export function Contact({ profile }: ContactProps) {
           className="max-w-[1440px] mx-auto"
         >
           <div className="mb-24 text-left">
-            <h2 className="font-sans text-4xl md:text-5xl font-black text-zinc-900 tracking-tighter mb-4 uppercase">Contact</h2>
-            <div className="flex items-center gap-3">
-              <span className="font-sans text-[11px] tracking-[0.4em] text-primary uppercase font-bold">Contact Us</span>
-              <div className="w-12 h-[1px] bg-primary" />
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-[1px] bg-blue-800" />
+              <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Global Command</span>
             </div>
+            <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
+              INITIATE <br/> <span className="text-zinc-200">DEPLOYMENT.</span>
+            </h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
