@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export function AlchemistHero() {
+export function Hero() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -22,29 +22,30 @@ export function AlchemistHero() {
             style={{ color: '#1e3a8a' }}
             className="font-sans text-[11px] tracking-[0.2em] uppercase font-bold"
           >
-            Digital Solutions for Modern Businesses
+            Digital Sovereignty for Modern Enterprises
           </p>
-          <h1 className="font-sans text-5xl md:text-7xl leading-[1.1] tracking-[-0.04em] text-zinc-900 font-black">
-            We Build Custom <br/> Software to Help <br/> Your Business Grow.
+          <h1 className="font-sans text-5xl md:text-7xl leading-[1.1] tracking-[-0.04em] text-zinc-900 font-black uppercase">
+            Institutional <br/> Systems. Built <br/> to Scale.
           </h1>
           <h2 className="font-sans text-2xl text-zinc-500 font-light leading-relaxed">
-            Copper Boston Group helps you automate your work and save operational costs with smart technology solutions.
+            Stop building on borrowed land. We engineer high-performance digital infrastructure with 100% code ownership and zero platform commission.
           </h2>
 
           <div className="pt-4">
             <button
               onClick={() => scrollTo("contact")}
               style={{ backgroundColor: '#1e3a8a' }}
-              className="text-white px-10 py-5 font-bold uppercase tracking-widest text-[13px] hover:opacity-90 transition-all duration-300 cursor-pointer"
+              className="text-white px-10 py-5 font-bold uppercase tracking-widest text-[13px] hover:opacity-90 transition-all duration-300 cursor-pointer flex items-center gap-3"
             >
-              Get a Free Quote
+              <span>DEPLOY YOUR SYSTEM</span>
+              <span className="material-symbols-outlined text-[16px]">rocket_launch</span>
             </button>
           </div>
 
           <div className="pt-12">
-            <h3 className="font-sans text-xl font-black text-zinc-900 mb-4 uppercase tracking-tighter">Technology Made Simple</h3>
+            <h3 className="font-sans text-xl font-black text-zinc-900 mb-4 uppercase tracking-tighter">Beyond the Website</h3>
             <p className="font-sans text-sm text-zinc-500 leading-relaxed max-w-md font-light">
-              We focus on building software that actually works for you, making your daily business tasks easier and more efficient.
+              We don't just build pages; we architect the operational engines that drive your business growth with surgical precision.
             </p>
           </div>
         </div>

@@ -19,11 +19,11 @@ const initialState: ContactFormState = {
     error: ""
 };
 
-interface AlchemistContactProps {
+interface ContactProps {
   profile: ProfileData | null;
 }
 
-export function AlchemistContact({ profile }: AlchemistContactProps) {
+export function Contact({ profile }: ContactProps) {
   const [state, formAction] = useActionState(sendEmail, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -176,13 +176,50 @@ export function AlchemistContact({ profile }: AlchemistContactProps) {
         </motion.div>
       </section>
       
-      <footer className="bg-zinc-50 flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 border-t border-zinc-100 mt-auto">
-        <div className="text-xl font-black text-zinc-900 mb-4 md:mb-0 tracking-tighter uppercase">
-          CBG
-        </div>
+      <footer className="bg-zinc-50 py-24 px-6 md:px-12 border-t border-zinc-200">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+            <div className="md:col-span-2 space-y-8">
+              <div className="text-3xl font-black text-zinc-900 tracking-tighter uppercase">CBG</div>
+              <p className="font-sans text-sm text-zinc-500 font-light leading-relaxed max-w-sm">
+                Copper Boston Group is an engineering-first agency specializing in proprietary digital infrastructure and sovereign software ecosystems. We bridge the gap between complex architecture and business success.
+              </p>
+            </div>
 
-        <div className="font-sans text-[11px] tracking-[0.1em] uppercase font-bold text-zinc-400">
-          © 2026 Copper Boston Group. ALL RIGHTS RESERVED.
+            <div>
+              <h4 className="font-sans text-[10px] tracking-[0.3em] text-zinc-900 uppercase font-black mb-8">Navigation</h4>
+              <nav className="flex flex-col gap-4">
+                {["About", "Portfolio", "Pricing", "Contact"].map((link) => (
+                  <button 
+                    key={link}
+                    onClick={() => {
+                      const el = document.getElementById(link.toLowerCase());
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="font-sans text-[11px] text-zinc-400 uppercase tracking-widest hover:text-blue-800 text-left transition-colors"
+                  >
+                    {link}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            <div>
+              <h4 className="font-sans text-[10px] tracking-[0.3em] text-zinc-900 uppercase font-black mb-8">Location</h4>
+              <p className="font-sans text-[11px] text-zinc-400 uppercase tracking-widest leading-relaxed">
+                Setapak, 53300 <br/> Kuala Lumpur, <br/> Malaysia.
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-12 border-t border-zinc-200 flex flex-col md:row justify-between items-center gap-6">
+             <p className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-zinc-400">
+               © 2026 Copper Boston Group. ALL RIGHTS RESERVED.
+             </p>
+             <p className="font-sans text-[9px] tracking-[0.4em] uppercase font-black text-zinc-300">
+               Sovereign Infrastructure. Built to Scale.
+             </p>
+          </div>
         </div>
       </footer>
     </>

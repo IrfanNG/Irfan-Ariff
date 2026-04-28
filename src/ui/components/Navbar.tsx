@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-export function AlchemistNavbar() {
+export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
 
@@ -16,7 +16,7 @@ export function AlchemistNavbar() {
   };
 
   useEffect(() => {
-    const sections = ["hero", "about", "services", "portfolio", "contact"];
+    const sections = ["hero", "about", "portfolio", "pricing", "contact"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -54,7 +54,7 @@ export function AlchemistNavbar() {
           </div>
 
           <div className="hidden md:flex space-x-12">
-            {["About", "Services", "Portfolio"].map((link) => {
+            {["About", "Portfolio", "Pricing"].map((link) => {
               const id = link.toLowerCase();
               const isActive = activeSection === id;
 
@@ -106,7 +106,7 @@ export function AlchemistNavbar() {
       {isMenuOpen && (
         <div className="fixed inset-0 z-[95] bg-white pt-32 px-6 md:hidden">
           <nav className="flex flex-col gap-10">
-            {["About", "Services", "Portfolio", "Contact"].map((link) => (
+            {["About", "Portfolio", "Pricing", "Contact"].map((link) => (
               <button
                 key={link}
                 onClick={() => scrollTo(link.toLowerCase())}

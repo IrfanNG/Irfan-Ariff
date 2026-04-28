@@ -1,17 +1,20 @@
-import { AlchemistHero } from "@/src/ui/sections/AlchemistHero";
-import { AlchemistAbout } from "@/src/ui/sections/AlchemistAbout";
-import { AlchemistServices } from "@/src/ui/sections/AlchemistServices";
-import { AlchemistProjects } from "@/src/ui/sections/AlchemistProjects";
-import { AlchemistContact } from "@/src/ui/sections/AlchemistContact";
+import { Hero } from "@/src/ui/sections/Hero";
+import { About } from "@/src/ui/sections/About";
+import { Projects } from "@/src/ui/sections/Projects";
+import { Problem } from "@/src/ui/sections/Problem";
+import { Comparison } from "@/src/ui/sections/Comparison";
+import { System } from "@/src/ui/sections/System";
+import { Process } from "@/src/ui/sections/Process";
+import { Pricing } from "@/src/ui/sections/Pricing";
+import { Contact } from "@/src/ui/sections/Contact";
 import { VisitTracker } from "@/components/analytics/visit-tracker";
 import { createClient } from "@/lib/supabase/server";
 import { 
   getProjects, 
-  getProfile, 
-  getServices
+  getProfile
 } from "@/lib/supabase/queries";
 
-import { AlchemistLayout } from "@/src/ui/layout/AlchemistLayout";
+import { Layout } from "@/src/ui/layout/Layout";
 
 export const revalidate = 60;
 
@@ -20,30 +23,35 @@ export default async function Home() {
 
   const [
     projects,
-    profile,
-    services
+    profile
   ] = await Promise.all([
     getProjects(supabase),
-    getProfile(supabase),
-    getServices(supabase)
+    getProfile(supabase)
   ]);
 
   return (
-    <AlchemistLayout>
+    <Layout>
       <div className="block w-full max-w-[100vw] relative bg-white">
         <VisitTracker />
         
-        {/* OPERATION ALCHEMIST: THE COMPLETE STRIKE */}
-        <AlchemistHero />
+        <Hero />
         
-        <AlchemistProjects projects={projects} />
+        <Projects projects={projects} />
 
-        <AlchemistAbout />
+        <Problem />
 
-        <AlchemistServices services={services} />
+        <Comparison />
 
-        <AlchemistContact profile={profile} />
+        <System />
+
+        <About />
+
+        <Pricing />
+
+        <Process />
+
+        <Contact profile={profile} />
       </div>
-    </AlchemistLayout>
+    </Layout>
   );
 }

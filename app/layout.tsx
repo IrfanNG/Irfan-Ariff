@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { Toaster } from "@/components/ui/sonner";
-import { AlchemistNavbar } from "@/src/ui/components/AlchemistNavbar";
+import { Navbar } from "@/src/ui/components/Navbar";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
@@ -31,7 +31,7 @@ export default async function RootLayout({
         jetbrainsMono.variable
       )}>
         <div className="velvet-grain" />
-        <AlchemistNavbar />
+        <Navbar />
         <main className="relative flex flex-col w-full min-h-screen">
           {children}
         </main>

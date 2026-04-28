@@ -3,11 +3,11 @@
 import { ServiceData } from "@/lib/types";
 import { motion } from "framer-motion";
 
-interface AlchemistServicesProps {
+interface ServicesProps {
   services: ServiceData[];
 }
 
-export function AlchemistServices({ services }: AlchemistServicesProps) {
+export function Services({ services }: ServicesProps) {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });

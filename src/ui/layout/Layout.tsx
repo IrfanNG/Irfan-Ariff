@@ -1,10 +1,10 @@
 "use client";
 
-interface AlchemistLayoutProps {
+interface LayoutProps {
   children: React.ReactNode;
 }
 
-export function AlchemistLayout({ children }: AlchemistLayoutProps) {
+export function Layout({ children }: LayoutProps) {
   return (
     <main className="w-full">
       {children}
