@@ -12,21 +12,21 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
       title: "Qalam Irma",
       category: "Retail & Printing Hub",
       url: "https://qalamirma.netlify.app/",
-      image: "/projects/qalam.png",
+      image: "/projects/espace.png",
       id: "SOL-01"
     },
     {
       title: "ESPACE",
       category: "Elite Venue Booking",
       url: "https://event-booking-system-sage.vercel.app/",
-      image: "/projects/espace.png",
+      image: "/projects/habibah.png",
       id: "SOL-02"
     },
     {
       title: "Habibah Kamal",
       category: "Umrah & Personal Brand",
       url: "https://habibahkamal.netlify.app/",
-      image: "/projects/habibah.png",
+      image: "/projects/qalam.png",
       id: "SOL-03"
     }
   ];
