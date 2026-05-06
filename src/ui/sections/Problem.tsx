@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { XCircle, TrendingDown, Lock } from "lucide-react";
 
 export function Problem() {
   const frictions = [
@@ -24,10 +23,9 @@ export function Problem() {
 
   return (
     <section id="problem" className="py-32 px-6 md:px-12 bg-zinc-50 border-y border-zinc-100 relative overflow-hidden">
-      {/* Structural Grid Background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#1e3a8a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -37,10 +35,10 @@ export function Problem() {
         <div className="mb-24">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-8 h-[1px] bg-blue-800" />
-            <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Friction Audit</span>
+            <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Friction Audit</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            THE GROWTH <br/> <span className="text-zinc-200">BARRIER.</span>
+            THE GROWTH <br/> <span className="text-zinc-800">BARRIER.</span>
           </h2>
         </div>
 
@@ -52,11 +50,11 @@ export function Problem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.2 }}
-              className="p-12 bg-white border border-zinc-100 group hover:border-blue-800 transition-all duration-500"
+              className="p-12 bg-white border border-zinc-100 group hover:border-blue-950 transition-all duration-500"
             >
-              <p className="font-mono text-[10px] text-zinc-300 mb-8 group-hover:text-blue-800 transition-colors">{f.id}</p>
-              <h3 className="font-sans text-2xl font-black mb-4 uppercase tracking-tighter">{f.title}</h3>
-              <p className="font-sans text-sm text-zinc-500 leading-relaxed font-light">
+              <p className="font-mono text-[12px] text-zinc-700 mb-8 group-hover:text-blue-950 transition-colors">{f.id}</p>
+              <h3 className="font-sans text-2xl font-black mb-4 uppercase tracking-tighter text-zinc-950">{f.title}</h3>
+              <p className="font-sans text-sm md:text-base text-zinc-700 leading-relaxed font-normal">
                 {f.description}
               </p>
             </motion.div>
@@ -64,17 +62,17 @@ export function Problem() {
         </div>
 
         <div className="mt-24 pt-12 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="font-sans text-2xl font-black tracking-tighter uppercase italic text-zinc-300">
-            "Your tech should be an asset, not an expense."
+          <p className="font-sans text-2xl font-black tracking-tighter uppercase italic text-zinc-800">
+            &quot;Your tech should be an asset, not an expense.&quot;
           </p>
           <div className="flex gap-12">
              <div className="text-center">
                 <p className="text-4xl font-black text-zinc-900 tracking-tighter">100%</p>
-                <p className="text-[9px] uppercase tracking-widest text-zinc-400 font-bold mt-1">Ownership</p>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-zinc-700 font-bold mt-1">Ownership</p>
              </div>
              <div className="text-center">
                 <p className="text-4xl font-black text-zinc-900 tracking-tighter">0%</p>
-                <p className="text-[9px] uppercase tracking-widest text-zinc-400 font-bold mt-1">Commission</p>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-zinc-700 font-bold mt-1">Commission</p>
              </div>
           </div>
         </div>

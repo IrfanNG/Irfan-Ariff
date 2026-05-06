@@ -16,10 +16,10 @@ export function About() {
         <div className="mb-24">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-8 h-[1px] bg-blue-800" />
-            <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Engineering Force</span>
+            <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Engineering Force</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            OUR <br/> <span className="text-zinc-200">VISION.</span>
+            OUR <br/> <span className="text-zinc-800">VISION.</span>
           </h2>
         </div>
 
@@ -35,9 +35,9 @@ export function About() {
 
           <div className="space-y-10">
             <h3 className="font-sans text-5xl md:text-6xl font-black text-zinc-900 leading-[0.9] tracking-tighter uppercase">
-              Architecting <br/> <span className="text-zinc-300">Sovereignty.</span>
+              Architecting <br/> <span className="text-zinc-800">Sovereignty.</span>
             </h3>
-            <p className="font-sans text-base text-zinc-500 font-light leading-relaxed max-w-xl">
+            <p className="font-sans text-base md:text-lg text-zinc-700 font-normal leading-relaxed max-w-xl">
               Copper Boston Group (CBG) engineers proprietary digital infrastructure that gives businesses absolute control over their revenue and data. We bridge the gap between complex software architecture and operational success.
             </p>
             
@@ -45,24 +45,24 @@ export function About() {
               <div className="flex gap-6 items-start">
                 <div className="w-1.5 h-1.5 mt-2 rounded-full bg-blue-800 shrink-0" />
                 <div>
-                  <h4 className="font-sans font-black text-zinc-900 uppercase tracking-tight text-sm mb-1">Ownership First</h4>
-                  <p className="font-sans text-sm text-zinc-500 leading-relaxed font-light">You own 100% of the code and database. We eliminate vendor lock-in so you control your own future.</p>
+                  <h4 className="font-sans font-black text-zinc-950 uppercase tracking-tight text-sm mb-1">Ownership First</h4>
+                  <p className="font-sans text-sm md:text-base text-zinc-700 leading-relaxed font-normal">You own 100% of the code and database. We eliminate vendor lock-in so you control your own future.</p>
                 </div>
               </div>
               
               <div className="flex gap-6 items-start">
                 <div className="w-1.5 h-1.5 mt-2 rounded-full bg-blue-800 shrink-0" />
                 <div>
-                  <h4 className="font-sans font-black text-zinc-900 uppercase tracking-tight text-sm mb-1">Proprietary Engines</h4>
-                  <p className="font-sans text-sm text-zinc-500 leading-relaxed font-light">We build custom systems designed to eliminate platform fees and middlemen dependencies.</p>
+                  <h4 className="font-sans font-black text-zinc-950 uppercase tracking-tight text-sm mb-1">Proprietary Engines</h4>
+                  <p className="font-sans text-sm md:text-base text-zinc-700 leading-relaxed font-normal">We build custom systems designed to eliminate platform fees and middlemen dependencies.</p>
                 </div>
               </div>
 
               <div className="flex gap-6 items-start">
                 <div className="w-1.5 h-1.5 mt-2 rounded-full bg-blue-800 shrink-0" />
                 <div>
-                  <h4 className="font-sans font-black text-zinc-900 uppercase tracking-tight text-sm mb-1">Institutional Grade</h4>
-                  <p className="font-sans text-sm text-zinc-500 leading-relaxed font-light">Engineering standards that scale from small startups to established high-traffic enterprises.</p>
+                  <h4 className="font-sans font-black text-zinc-950 uppercase tracking-tight text-sm mb-1">Institutional Grade</h4>
+                  <p className="font-sans text-sm md:text-base text-zinc-700 leading-relaxed font-normal">Engineering standards that scale from small startups to established high-traffic enterprises.</p>
                 </div>
               </div>
             </div>

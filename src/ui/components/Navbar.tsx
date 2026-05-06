@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -45,10 +46,12 @@ export function Navbar() {
         <div className="flex justify-between items-center w-full px-12 py-6 max-w-[1440px] mx-auto">
           <div 
             className={cn(
-              "text-2xl font-black tracking-tighter uppercase cursor-pointer transition-colors duration-300",
-              activeSection === "hero" ? "text-primary" : "text-zinc-900"
+              "text-2xl font-black tracking-tighter uppercase cursor-pointer transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4",
+              activeSection === "hero" ? "text-blue-950" : "text-zinc-950"
             )} 
             onClick={() => scrollTo("hero")}
+            role="button"
+            tabIndex={0}
           >
             CBG
           </div>
@@ -63,15 +66,15 @@ export function Navbar() {
                   key={link}
                   onClick={() => scrollTo(id)}
                   className={cn(
-                    "relative font-sans tracking-[-0.04em] uppercase text-[11px] transition-all duration-300 pb-1 group",
+                    "relative font-sans tracking-[0.08em] uppercase text-[12px] transition-all duration-300 pb-1 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4",
                     isActive 
-                      ? "text-zinc-900 font-bold border-b-2 border-zinc-900" 
-                      : "text-zinc-400 font-light hover:text-zinc-900"
+                      ? "text-zinc-950 font-semibold border-b-2 border-blue-950" 
+                      : "text-zinc-700 font-medium hover:text-zinc-950"
                   )}
                 >
                   {link}
                   {!isActive && (
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-zinc-900 transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-950 transition-all duration-300 group-hover:w-full" />
                   )}
                 </button>
               );
@@ -82,10 +85,10 @@ export function Navbar() {
             <button 
               onClick={() => scrollTo("contact")}
               className={cn(
-                "font-sans tracking-[-0.04em] uppercase font-bold text-[11px] border px-6 py-3 transition-all duration-300",
+                "font-sans tracking-[0.08em] uppercase font-bold text-[12px] border px-6 py-3 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4",
                 activeSection === "contact"
-                  ? "bg-zinc-900 text-white border-zinc-900"
-                  : "text-zinc-900 border-zinc-200 hover:bg-zinc-50"
+                  ? "bg-blue-950 text-white border-blue-950"
+                  : "text-zinc-950 border-zinc-300 hover:bg-zinc-50"
               )}
             >
               LET&apos;S TALK
@@ -94,11 +97,9 @@ export function Navbar() {
 
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-zinc-900"
+            className="md:hidden text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4"
           >
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'wght' 300" }}>
-              {isMenuOpen ? "close" : "menu"}
-            </span>
+            {isMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
         </div>
       </nav>
@@ -110,7 +111,7 @@ export function Navbar() {
               <button
                 key={link}
                 onClick={() => scrollTo(link.toLowerCase())}
-                className="font-sans font-bold text-5xl tracking-tighter text-zinc-900 uppercase text-left"
+                className="font-sans font-bold text-4xl tracking-tighter text-zinc-950 uppercase text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4"
               >
                 {link}
               </button>

@@ -15,7 +15,7 @@ export function AlchemistExperience({ experiences }: AlchemistExperienceProps) {
       
       <div className="flex flex-col gap-24 relative z-10">
         <div className="space-y-4">
-          <span className="font-mono text-[10px] tracking-[0.4em] text-cyan-500 uppercase">Track_Record</span>
+          <span className="font-mono text-[12px] tracking-[0.22em] text-cyan-200 uppercase">Track_Record</span>
           <h2 className="font-sans font-black text-6xl md:text-9xl uppercase tracking-tighter text-white leading-none">
             Work <br />
             History.
@@ -33,7 +33,7 @@ export function AlchemistExperience({ experiences }: AlchemistExperienceProps) {
               className="group grid grid-cols-1 md:grid-cols-12 gap-12 py-16 border-b border-white/5 hover:bg-white/[0.01] transition-all duration-500 px-4 items-start"
             >
               <div className="md:col-span-2">
-                <span className="font-mono text-xs text-zinc-400 group-hover:text-cyan-400 transition-colors">
+                <span className="font-mono text-[12px] text-zinc-200 group-hover:text-cyan-200 transition-colors">
                   [{exp.date_range}]
                 </span>
               </div>
@@ -42,13 +42,13 @@ export function AlchemistExperience({ experiences }: AlchemistExperienceProps) {
                 <h3 className="font-sans font-black text-2xl uppercase tracking-tighter text-white">
                   {exp.title}
                 </h3>
-                <p className="font-sans font-bold text-cyan-500 uppercase tracking-widest text-[10px]">
+                <p className="font-sans font-bold text-cyan-200 uppercase tracking-[0.18em] text-[12px]">
                   {exp.organization}
                 </p>
               </div>
 
               <div className="md:col-span-6">
-                <p className="font-sans text-lg text-zinc-500 leading-relaxed group-hover:text-zinc-300 transition-colors">
+                <p className="font-sans text-lg text-zinc-200 leading-relaxed group-hover:text-white transition-colors">
                   {exp.description}
                 </p>
               </div>

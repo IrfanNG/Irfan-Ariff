@@ -43,10 +43,10 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
         <div className="mb-24">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-8 h-[1px] bg-blue-800" />
-            <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Strategic Deployments</span>
+            <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Strategic Deployments</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            SELECTED <br/> <span className="text-zinc-200">PROJECTS.</span>
+            SELECTED <br/> <span className="text-zinc-800">PROJECTS.</span>
           </h2>
         </div>
 
@@ -64,27 +64,27 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
               transition={{ delay: idx * 0.1, duration: 0.8 }}
               className="group flex flex-col"
             >
-              <div className="relative aspect-video bg-zinc-50 border border-zinc-100 overflow-hidden mb-8 shadow-sm group-hover:border-blue-800/30 transition-all duration-500">
+              <div className="relative aspect-video bg-zinc-50 border border-zinc-100 overflow-hidden mb-8 shadow-sm group-hover:border-blue-950/30 transition-all duration-500">
                 <img 
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-blue-800/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-blue-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 shadow-lg">
                    <ArrowUpRight className="w-4 h-4 text-zinc-900" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <p className="font-sans text-[10px] text-blue-800 font-black uppercase tracking-[0.3em]">
+                <p className="font-sans text-[12px] text-blue-950 font-bold uppercase tracking-[0.22em]">
                   {project.category}
                 </p>
                 <div className="flex justify-between items-start">
-                  <h3 className="font-sans text-2xl font-black text-zinc-900 uppercase tracking-tighter leading-none group-hover:text-blue-800 transition-colors">
+                  <h3 className="font-sans text-2xl font-black text-zinc-950 uppercase tracking-tighter leading-none group-hover:text-blue-950 transition-colors">
                     {project.title}
                   </h3>
-                  <span className="font-mono text-[10px] text-zinc-300">
+                  <span className="font-mono text-[12px] text-zinc-700">
                     {project.id}
                   </span>
                 </div>
@@ -94,7 +94,7 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
         </div>
 
         <div className="mt-32 text-center border-t border-zinc-100 pt-24">
-          <p className="font-sans text-xs text-zinc-400 uppercase tracking-widest mb-8">
+          <p className="font-sans text-sm text-zinc-700 uppercase tracking-[0.18em] mb-8 font-semibold">
             Ready to initiate your next digital strike?
           </p>
           <button 
@@ -102,7 +102,7 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
               const el = document.getElementById('contact');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="px-12 py-5 bg-zinc-900 text-white font-sans font-bold text-[11px] tracking-[0.3em] uppercase hover:bg-blue-800 transition-all duration-300"
+            className="px-12 py-5 bg-blue-950 text-white font-sans font-bold text-[12px] tracking-[0.18em] uppercase hover:bg-blue-900 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4"
           >
             Initiate Project Deployment
           </button>
@@ -110,4 +110,4 @@ export function Projects({ projects: dbProjects }: { projects: ProjectData[] }) 
       </motion.div>
     </section>
   );
-}
+}
