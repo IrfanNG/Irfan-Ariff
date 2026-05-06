@@ -23,12 +23,12 @@ export function Comparison() {
           <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-[1px] bg-blue-800" />
-              <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Strategic Audit</span>
+              <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Strategic Audit</span>
             </div>
             <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">
-              REVENUE <br/> <span className="text-zinc-200">INTEGRITY.</span>
+              REVENUE <br/> <span className="text-zinc-800">INTEGRITY.</span>
             </h2>
-            <p className="font-sans text-lg text-zinc-500 font-light leading-relaxed max-w-xl">
+            <p className="font-sans text-lg md:text-xl text-zinc-700 font-normal leading-relaxed max-w-xl">
               Platform dependency is a silent tax on your growth. We engineer independent digital assets that eliminate commission leakage and restore absolute control over your business intelligence.
             </p>
           </div>
@@ -37,11 +37,11 @@ export function Comparison() {
              {assets.map((asset, i) => (
                <div key={i} className="p-8 border border-zinc-100 bg-zinc-50 flex justify-between items-center group hover:border-blue-800 transition-all duration-500">
                   <div>
-                    <p className="font-sans text-[10px] tracking-[0.2em] text-zinc-400 font-bold mb-1 uppercase">{asset.label}</p>
-                    <p className="font-sans text-sm text-zinc-600 font-light">{asset.desc}</p>
+                    <p className="font-sans text-[12px] tracking-[0.18em] text-zinc-700 font-bold mb-1 uppercase">{asset.label}</p>
+                    <p className="font-sans text-sm md:text-base text-zinc-700 font-normal">{asset.desc}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-sans text-3xl font-black text-zinc-900 tracking-tighter uppercase group-hover:text-blue-800 transition-colors">{asset.value}</p>
+                    <p className="font-sans text-3xl font-black text-zinc-900 tracking-tighter uppercase group-hover:text-blue-950 transition-colors">{asset.value}</p>
                   </div>
                </div>
              ))}
@@ -53,19 +53,19 @@ export function Comparison() {
              {/* The Attrition Side */}
              <div className="p-12 md:p-16 bg-zinc-50 border-r border-zinc-100">
                 <div className="flex items-center gap-3 mb-12">
-                   <XCircle className="text-zinc-300 w-5 h-5" />
-                   <h3 className="font-sans text-xs font-black uppercase tracking-[0.2em] text-zinc-400">Platform Attrition</h3>
+                   <XCircle className="text-zinc-700 w-5 h-5" />
+                   <h3 className="font-sans text-[12px] font-black uppercase tracking-[0.18em] text-zinc-700">Platform Attrition</h3>
                 </div>
                 <div className="space-y-8">
                    {[
                      { t: "PLATFORM FEES", d: "Pay 8% - 30% to external platforms." },
                      { t: "NO CUSTOMER DATA", d: "Database held by third parties." },
                      { t: "ACCOUNT BAN RISK", d: "Your business can be halted at any time." },
-                     { t: "GENERIC DESIGN", d: "Look like thousands of other sellers." }
+                    { t: "GENERIC DESIGN", d: "Look like thousands of other sellers." }
                    ].map((item, i) => (
                      <div key={i} className="group">
-                        <h4 className="font-sans text-sm font-black text-zinc-400 uppercase mb-1">{item.t}</h4>
-                        <p className="font-sans text-sm text-zinc-300 font-light italic">{item.d}</p>
+                        <h4 className="font-sans text-sm font-black text-zinc-800 uppercase mb-1">{item.t}</h4>
+                        <p className="font-sans text-sm md:text-base text-zinc-700 font-normal italic">{item.d}</p>
                      </div>
                    ))}
                 </div>
@@ -74,24 +74,24 @@ export function Comparison() {
              {/* The Sovereignty Side */}
              <div className="p-12 md:p-16 bg-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8">
-                   <div className="w-12 h-12 rounded-full border border-blue-50 flex items-center justify-center animate-pulse">
+                   <div className="w-12 h-12 rounded-full border border-blue-200 flex items-center justify-center animate-pulse">
                       <div className="w-2 h-2 rounded-full bg-blue-800" />
                    </div>
                 </div>
                 <div className="flex items-center gap-3 mb-12">
                    <CheckCircle2 className="text-blue-800 w-5 h-5" />
-                   <h3 className="font-sans text-xs font-black uppercase tracking-[0.2em] text-blue-800">Direct System</h3>
+                   <h3 className="font-sans text-[12px] font-black uppercase tracking-[0.18em] text-blue-950">Direct System</h3>
                 </div>
                 <div className="space-y-8">
                    {[
                      { t: "KEEP 100% REVENUE", d: "Zero sales commission fees." },
                      { t: "FULL OWNERSHIP", d: "Code & Database are yours forever." },
                      { t: "DIRECT LEADS", d: "Customer data delivered directly to you." },
-                     { t: "AUTHORITATIVE BRAND", d: "Professional custom design that builds trust." }
+                    { t: "AUTHORITATIVE BRAND", d: "Professional custom design that builds trust." }
                    ].map((item, i) => (
                      <div key={i} className="group">
-                        <h4 className="font-sans text-sm font-black text-zinc-900 uppercase mb-1">{item.t}</h4>
-                        <p className="font-sans text-sm text-zinc-500 font-light">{item.d}</p>
+                        <h4 className="font-sans text-sm font-black text-zinc-950 uppercase mb-1">{item.t}</h4>
+                        <p className="font-sans text-sm md:text-base text-zinc-700 font-normal">{item.d}</p>
                      </div>
                    ))}
                 </div>

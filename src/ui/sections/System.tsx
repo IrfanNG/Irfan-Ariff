@@ -35,13 +35,13 @@ export function System() {
           <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-[1px] bg-blue-800" />
-              <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Architecture Spec</span>
+              <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Architecture Spec</span>
             </div>
             <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-12">
-              BEYOND THE <br/> <span className="text-zinc-200">INTERFACE.</span>
+              BEYOND THE <br/> <span className="text-zinc-800">INTERFACE.</span>
             </h2>
-            <p className="font-sans text-lg text-zinc-500 font-light leading-relaxed max-w-xl">
-              We don't just build websites; we architect the operational engines behind them. From custom CRMs to automated workflows, we provide full control over your digital infrastructure.
+            <p className="font-sans text-lg md:text-xl text-zinc-700 font-normal leading-relaxed max-w-xl">
+              We don&apos;t just build websites; we architect the operational engines behind them. From custom CRMs to automated workflows, we provide full control over your digital infrastructure.
             </p>
           </div>
           
@@ -57,28 +57,28 @@ export function System() {
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                    <p className="font-mono text-[8px] text-zinc-500 tracking-widest uppercase">System Status: Active</p>
+                    <p className="font-mono text-[11px] text-zinc-300 tracking-[0.16em] uppercase">System Status: Active</p>
                   </div>
                </div>
                <div className="p-6 space-y-4">
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-zinc-800/30 p-4 rounded-lg border border-zinc-800/50">
-                      <p className="font-sans text-[7px] text-zinc-500 uppercase tracking-widest mb-1">Gross Revenue</p>
+                      <p className="font-sans text-[10px] text-zinc-300 uppercase tracking-[0.14em] mb-1">Gross Revenue</p>
                       <p className="font-sans text-lg font-black text-white">$42,850</p>
                     </div>
                     <div className="bg-zinc-800/30 p-4 rounded-lg border border-zinc-800/50">
-                      <p className="font-sans text-[7px] text-zinc-500 uppercase tracking-widest mb-1">Active Leads</p>
+                      <p className="font-sans text-[10px] text-zinc-300 uppercase tracking-[0.14em] mb-1">Active Leads</p>
                       <p className="font-sans text-lg font-black text-white">1,240</p>
                     </div>
                     <div className="bg-zinc-800/30 p-4 rounded-lg border border-zinc-800/50">
-                      <p className="font-sans text-[7px] text-zinc-500 uppercase tracking-widest mb-1">Conv. Rate</p>
+                      <p className="font-sans text-[10px] text-zinc-300 uppercase tracking-[0.14em] mb-1">Conv. Rate</p>
                       <p className="font-sans text-lg font-black text-white">4.8%</p>
                     </div>
                   </div>
 
                   <div className="bg-zinc-800/20 p-4 rounded-lg border border-zinc-800/50">
                     <div className="flex justify-between items-center mb-3">
-                      <p className="font-sans text-[7px] text-zinc-500 uppercase tracking-widest">Real-time Activity</p>
+                      <p className="font-sans text-[10px] text-zinc-300 uppercase tracking-[0.14em]">Real-time Activity</p>
                       <div className="w-1 h-1 rounded-full bg-blue-500" />
                     </div>
                     <div className="space-y-2">
@@ -89,10 +89,10 @@ export function System() {
                       ].map((item, i) => (
                         <div key={i} className="flex justify-between items-center border-l border-zinc-800 pl-3 py-0.5">
                           <div>
-                            <p className="font-sans text-[9px] text-white font-bold uppercase tracking-tight">{item.t}</p>
-                            <p className="font-sans text-[8px] text-zinc-500">{item.d}</p>
+                            <p className="font-sans text-[10px] text-white font-bold uppercase tracking-tight">{item.t}</p>
+                            <p className="font-sans text-[10px] text-zinc-300">{item.d}</p>
                           </div>
-                          <span className="font-sans text-[7px] text-zinc-700 uppercase">{item.time}</span>
+                          <span className="font-sans text-[10px] text-zinc-400 uppercase">{item.time}</span>
                         </div>
                       ))}
                     </div>
@@ -110,11 +110,11 @@ export function System() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.2 }}
-              className="p-12 border border-zinc-100 bg-zinc-50 group hover:border-blue-800 transition-all duration-500"
+              className="p-12 border border-zinc-100 bg-zinc-50 group hover:border-blue-950 transition-all duration-500"
             >
-              <p className="font-mono text-[10px] text-zinc-300 mb-8 group-hover:text-blue-800 transition-colors">{spec.id}</p>
-              <h3 className="font-sans text-2xl font-black uppercase tracking-tighter mb-4">{spec.title}</h3>
-              <p className="font-sans text-sm text-zinc-500 leading-relaxed font-light">
+              <p className="font-mono text-[12px] text-zinc-700 mb-8 group-hover:text-blue-950 transition-colors">{spec.id}</p>
+              <h3 className="font-sans text-2xl font-black uppercase tracking-tighter mb-4 text-zinc-950">{spec.title}</h3>
+              <p className="font-sans text-sm md:text-base text-zinc-700 leading-relaxed font-normal">
                 {spec.description}
               </p>
             </motion.div>

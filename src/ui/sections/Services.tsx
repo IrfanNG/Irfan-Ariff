@@ -25,7 +25,7 @@ export function Services({ services }: ServicesProps) {
         <div className="mb-24">
           <h2 className="font-sans text-4xl md:text-5xl font-black text-zinc-900 tracking-tighter mb-4 uppercase">Services</h2>
           <div className="flex items-center gap-3">
-            <span className="font-sans text-[11px] tracking-[0.4em] text-primary uppercase font-bold">Check our Services</span>
+            <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Check our Services</span>
             <div className="w-12 h-[1px] bg-primary" />
           </div>
         </div>
@@ -36,7 +36,7 @@ export function Services({ services }: ServicesProps) {
             <h3 className="font-sans text-3xl font-black text-primary uppercase tracking-tighter group-hover:translate-x-2 transition-transform mb-6">
               Software Development
             </h3>
-            <p className="font-sans text-base text-zinc-500 font-light leading-relaxed">
+            <p className="font-sans text-base text-zinc-700 font-normal leading-relaxed">
               We build custom software that helps you automate tasks and work more efficiently. From mobile apps to business management tools, we create solutions that solve your specific problems and help you grow.
             </p>
           </div>
@@ -46,7 +46,7 @@ export function Services({ services }: ServicesProps) {
             <h3 className="font-sans text-3xl font-black text-primary uppercase tracking-tighter group-hover:translate-x-2 transition-transform mb-6">
               Website Design
             </h3>
-            <p className="font-sans text-base text-zinc-500 font-light leading-relaxed">
+            <p className="font-sans text-base text-zinc-700 font-normal leading-relaxed">
               Your website is your digital storefront. We design and build fast, modern websites that look great on any device and help you turn visitors into loyal customers.
             </p>
           </div>

@@ -42,25 +42,25 @@ export function Process() {
         <div className="mb-24 text-left">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-8 h-[1px] bg-blue-800" />
-            <span className="font-sans text-[10px] tracking-[0.4em] text-blue-800 uppercase font-black">Execution Protocol</span>
+            <span className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold">Execution Protocol</span>
           </div>
           <h2 className="font-sans text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
-            STRATEGIC <br/> <span className="text-zinc-200">PATH.</span>
+            STRATEGIC <br/> <span className="text-zinc-800">PATH.</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {steps.map((step, idx) => (
             <div key={idx} className="relative group">
-              <div className="text-8xl font-black text-zinc-200/50 absolute -top-8 -left-4 group-hover:text-blue-500/10 transition-colors duration-500">
+              <div className="text-8xl font-black text-zinc-700/10 absolute -top-8 -left-4 group-hover:text-blue-950/10 transition-colors duration-500">
                 {step.number}
               </div>
               <div className="relative pt-12 space-y-4">
                 <div>
-                   <p className="font-sans text-[10px] tracking-[0.3em] text-blue-800 uppercase font-bold mb-2">{step.subtitle}</p>
-                   <h3 className="font-sans text-2xl font-black text-zinc-900 uppercase tracking-tight">{step.title}</h3>
+                   <p className="font-sans text-[12px] tracking-[0.22em] text-blue-950 uppercase font-bold mb-2">{step.subtitle}</p>
+                   <h3 className="font-sans text-2xl font-black text-zinc-950 uppercase tracking-tight">{step.title}</h3>
                 </div>
-                <p className="font-sans text-sm text-zinc-500 leading-relaxed font-light">
+                <p className="font-sans text-sm md:text-base text-zinc-700 leading-relaxed font-normal">
                   {step.description}
                 </p>
               </div>
