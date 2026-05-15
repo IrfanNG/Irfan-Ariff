@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -43,18 +44,22 @@ export function Navbar() {
   return (
     <>
       <nav className="fixed top-0 w-full z-[100] bg-white border-b border-zinc-100">
-        <div className="flex justify-between items-center w-full px-12 py-6 max-w-[1440px] mx-auto">
-          <div 
-            className={cn(
-              "text-2xl font-black tracking-tighter uppercase cursor-pointer transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4",
-              activeSection === "hero" ? "text-blue-950" : "text-zinc-950"
-            )} 
+        <div className="flex justify-between items-center w-full px-6 py-0 max-w-[1440px] mx-auto">
+          <button
+            type="button"
+            className="cursor-pointer transition-opacity duration-300 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4"
             onClick={() => scrollTo("hero")}
-            role="button"
-            tabIndex={0}
+            aria-label="Go to top"
           >
-            CBG
-          </div>
+            <Image
+              src="/primary-logo.png"
+              alt="Copper Boston Group"
+              width={220}
+              height={64}
+              priority
+              className="h-32 w-auto mix-blend-multiply"
+            />
+          </button>
 
           <div className="hidden md:flex space-x-12">
             {["About", "Portfolio", "Pricing"].map((link) => {
@@ -85,7 +90,7 @@ export function Navbar() {
             <button 
               onClick={() => scrollTo("contact")}
               className={cn(
-                "font-sans tracking-[0.08em] uppercase font-bold text-[12px] border px-6 py-3 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4",
+                "font-sans tracking-[0.08em] uppercase font-bold text-[12px] border px-5 py-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4",
                 activeSection === "contact"
                   ? "bg-blue-950 text-white border-blue-950"
                   : "text-zinc-950 border-zinc-300 hover:bg-zinc-50"

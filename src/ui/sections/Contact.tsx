@@ -123,15 +123,14 @@ export function Contact({ profile }: ContactProps) {
 
       <footer className="bg-zinc-50 py-24 px-6 md:px-12 border-t border-zinc-200">
         <div className="max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
-            <div className="md:col-span-2 space-y-8">
-              <div className="text-3xl font-black text-zinc-950 tracking-tighter uppercase">CBG</div>
-              <p className="font-sans text-sm md:text-base text-zinc-700 font-normal leading-relaxed max-w-sm">
+          <div className="grid grid-cols-1 gap-16 md:grid-cols-[minmax(0,1.35fr)_220px_220px] md:items-start mb-24">
+            <div className="max-w-[620px]">
+              <p className="font-sans text-sm md:text-base text-zinc-700 font-normal leading-relaxed max-w-[34rem]">
                 Copper Boston Group is an engineering-first agency specializing in proprietary digital infrastructure and sovereign software ecosystems. We bridge the gap between complex architecture and business success.
               </p>
             </div>
 
-            <div>
+            <div className="md:justify-self-start">
               <h4 className="font-sans text-[12px] tracking-[0.22em] text-zinc-950 uppercase font-black mb-8">Navigation</h4>
               <nav className="flex flex-col gap-4">
                 {["About", "Portfolio", "Pricing", "Contact"].map((link) => (
@@ -149,7 +148,7 @@ export function Contact({ profile }: ContactProps) {
               </nav>
             </div>
 
-            <div>
+            <div className="md:justify-self-start">
               <h4 className="font-sans text-[12px] tracking-[0.22em] text-zinc-950 uppercase font-black mb-8">Location</h4>
               <p className="font-sans text-[12px] text-zinc-700 uppercase tracking-[0.18em] leading-relaxed">
                 Setapak, 53300 <br/> Kuala Lumpur, <br/> Malaysia.

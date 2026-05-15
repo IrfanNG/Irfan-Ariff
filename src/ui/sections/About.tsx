@@ -26,7 +26,7 @@ export function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
           <div className="relative aspect-[4/3] bg-zinc-100 border border-zinc-200 flex items-center justify-center overflow-hidden group shadow-2xl shadow-zinc-200/50">
              <img 
-               src="/about-image-new.jpeg" 
+               src="/about-image.png" 
                alt="About Us" 
                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
              />
