@@ -44,7 +44,7 @@ export function Navbar() {
   return (
     <>
       <nav className="fixed top-0 w-full z-[100] bg-white border-b border-zinc-100">
-        <div className="flex justify-between items-center w-full px-6 py-0 max-w-[1440px] mx-auto">
+        <div className="relative flex justify-between items-center w-full px-6 py-2 max-w-[1440px] mx-auto">
           <button
             type="button"
             className="cursor-pointer transition-opacity duration-300 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950 focus-visible:ring-offset-4"
@@ -57,11 +57,11 @@ export function Navbar() {
               width={220}
               height={64}
               priority
-              className="h-32 w-auto mix-blend-multiply"
+              className="h-14 w-auto mix-blend-multiply"
             />
           </button>
 
-          <div className="hidden md:flex space-x-12">
+          <div className="hidden md:flex items-center space-x-12 absolute left-1/2 -translate-x-1/2">
             {["About", "Portfolio", "Pricing"].map((link) => {
               const id = link.toLowerCase();
               const isActive = activeSection === id;
